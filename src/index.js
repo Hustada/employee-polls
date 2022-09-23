@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import reducer from './reducers';
 import middleware from './middleware';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 const store = createStore(reducer, middleware);
