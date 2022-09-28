@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleInitialData } from '../actions/shared'
 import Dashboard from "./Dashboard";
@@ -14,8 +15,10 @@ const App = (props) => {
   return (
     <div>
       <Nav />
-      <Login />
-      {props.loading === true ? null : <Dashboard />}
+      <Routes>
+        <Route path="/" exact element={ <Login /> } />
+        <Route path="/dashboard" exact element={props.loading === true ? null : <Dashboard />} />
+      </Routes>
     </div>
   )
 }
