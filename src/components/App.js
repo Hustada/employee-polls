@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { handleInitialData } from '../actions/shared'
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
+import Login from "./Login";
 import "../App.css"
 
 const App = (props) => {
@@ -13,6 +14,7 @@ const App = (props) => {
   return (
     <div>
       <Nav />
+      <Login />
       {props.loading === true ? null : <Dashboard />}
     </div>
   )
