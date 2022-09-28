@@ -9,16 +9,27 @@ import Button from '@mui/material/Button';
 
 const niceLookingDate = new Date().toDateString();
 
-const QuestionCard = (props) => {
+function getDate(timestamp) {
+  const date = new Date(timestamp)
+  const time = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+  return "" + time + " | " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
+}
+
+const QuestionCard = ({ questions, id }) => {
   return (
     <Grid item  xs={12} sm={6} md={3}>
       <Paper elevation={12} align="center" style={{padding: 6}}>
-        <Typography variant='h6' align="center">Mark Hustad</Typography>
-        <Typography variant='body2' align="center" sx={{ fontStyle: 'italic' }}>{niceLookingDate}</Typography>
+        <Typography variant='h6' align="center">{questions[id].author}</Typography>
+        <Typography variant='body2' align="center" sx={{ fontStyle: 'italic' }}>{getDate(questions[id].timestamp)}</Typography>
         <Button 
           variant="outlined"
           size="small"
           fullWidth="true"
+          sx=
+          {{
+            color: 'orange',
+            borderColor: 'orange'
+          }}
         >
           Show
         </Button>
@@ -27,13 +38,10 @@ const QuestionCard = (props) => {
   );
 }
 
-const mapStateToProps = ({ authedUser, users, questions }, { id }) => {
-  const question = questions[id];
-  
-  return {
-    authedUser,
-    questions
-  };
-};
+const mapStateToProps = ({ questions }) => (
+  {
+    questions: questions
+  }
+)
 
 export default connect(mapStateToProps)(QuestionCard);
