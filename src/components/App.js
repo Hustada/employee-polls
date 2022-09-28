@@ -2,14 +2,20 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from '../actions/shared'
 import Dashboard from "./Dashboard";
-import Question from "./QuestionCard";
+import Nav from "./Nav";
+import "../App.css"
 
 const App = (props) => {
   useEffect(() => {
     props.dispatch(handleInitialData())
   },[]);
 
-  return <div>{props.loading === true ? null : <Dashboard />}</div>
+  return (
+    <div>
+      <Nav />
+      {props.loading === true ? null : <Dashboard />}
+    </div>
+  )
 }
 
 const mapStateToProps = ({ authedUser }) => ({

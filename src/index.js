@@ -6,6 +6,7 @@ import reducer from './reducers';
 import middleware from './middleware';
 import './index.css';
 import App from './components/App';
+import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
 const store = createStore(reducer, middleware);
@@ -13,7 +14,9 @@ const store = createStore(reducer, middleware);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>
 );
 
