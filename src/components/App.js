@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from '../actions/shared'
 import Dashboard from "./Dashboard";
+import Question from "./QuestionCard";
 
 const App = (props) => {
   useEffect(() => {
