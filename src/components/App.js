@@ -6,6 +6,7 @@ import Dashboard from "./Dashboard";
 import Nav from "./Nav";
 import Login from "./Login";
 import "../App.css"
+import LoadingBar from "react-redux-loading-bar";
 
 const App = (props) => {
   useEffect(() => {
@@ -14,11 +15,14 @@ const App = (props) => {
 
   return (
     <div>
-      <Nav />
-      <Routes>
-        <Route path="/" exact element={ <Login /> } />
-        <Route path="/dashboard" exact element={props.loading === true ? null : <Dashboard />} />
-      </Routes>
+      <LoadingBar />
+        <Nav />
+      {props.loading === true ? null : (
+        <Routes>
+          <Route path="/" exact element={ <Login /> } />
+          <Route path="/dashboard" exact element={<Dashboard />} />
+        </Routes>
+      )}
     </div>
   )
 }
