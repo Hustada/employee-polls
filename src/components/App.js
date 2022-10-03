@@ -7,6 +7,7 @@ import Nav from "./Nav";
 import Login from "./Login";
 import "../App.css"
 import LoadingBar from "react-redux-loading-bar";
+import Question from "./Question";
 
 const App = (props) => {
   useEffect(() => {
@@ -19,6 +20,7 @@ const App = (props) => {
         <Nav />
       {props.loading === true ? null : (
         <Routes>
+          <Route path="/question/" exact element={ <Question />} />
           <Route path="/" exact element={ <Login /> } />
           <Route path="/dashboard" exact element={<Dashboard />} />
         </Routes>
