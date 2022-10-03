@@ -6,3 +6,9 @@ export function setAuthedUser(id) {
     id,
   };
 }
+
+export function logout() {
+  return {
+    type: LOGOUT,
+  }
+}
