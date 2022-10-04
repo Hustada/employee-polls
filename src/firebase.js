@@ -16,4 +16,58 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+const auth = getAuth(app);
+
+const getCurrentUser = () => {
+  return auth.currentUser
+}
+
+console.log('Firebase Auth:', getCurrentUser());
+
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+
+const signUp = () => {
+  useEffect()
+
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    alert("Success!");
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    // const errorMessage = error.message;
+    alert(errorCode);
+  });
+}
+
+const signIn = () => {
+
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    alert("Sign in Success!");
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    // const errorMessage = error.message;
+    alert(errorCode);
+  });
+}
+
+const signUserOut = () => {
+  signOut(auth).then(() => {
+    alert('Sign out Success!')
+    // Sign-out successful.
+  }).catch((error) => {
+    const errorCode = error.code;
+    alert(errorCode);
+    // An error happened.
+  });
+
 export default app;

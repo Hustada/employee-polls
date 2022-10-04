@@ -14,7 +14,15 @@ import app from '../firebase';
 function SignUp() {
 
   const auth = getAuth(app);
-  console.log('Firebase Auth:', auth);
+
+  const getCurrentUser = () => {
+    return auth.currentUser
+  }
+
+  console.log('Firebase Auth:', getCurrentUser());
+
+
+  
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
