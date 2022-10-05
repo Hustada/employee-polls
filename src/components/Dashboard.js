@@ -25,7 +25,7 @@ const Dashboard = (props) => {
       </Typography>
       <Grid container spacing={2}>
       {props.questionIds.map((id) => (
-         <QuestionCard id={id} />
+         <QuestionCard id={id} key={id}/>
       ))}
       </Grid>
       <Typography 

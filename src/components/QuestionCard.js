@@ -24,7 +24,7 @@ const QuestionCard = ({ questions, id }) => {
         <Button 
           variant="outlined"
           size="small"
-          fullWidth="true"
+          fullWidth
           sx=
           {{
             color: 'orange',
