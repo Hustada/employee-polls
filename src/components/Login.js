@@ -1,81 +1,115 @@
 import { setAuthedUser } from '../actions/authedUser';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { CssVarsProvider } from '@mui/joy/styles';
-import Select, { selectClasses } from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
+import { 
+  useNavigate,
+  useLocation,
+  useParams 
+} from 'react-router-dom';
+// import Select from '@mui/material/Select';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import Sheet from '@mui/joy/Sheet';
-import Typography from '@mui/joy/Typography';
-import TextField from '@mui/joy/TextField';
-import Button from '@mui/joy/Button';
-import Link from '@mui/joy/Link';
-import app from '../firebase';
+import Select, { selectClasses } from '@mui/joy/Select';
+import {
+  Button,
+  Box,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Typography,
+  TextField,
+  Container,
+} from '@mui/material'
+
+
+const withRouter = (Component)  => {
+  const ComponentWithRouterProp = (props) => {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return (
+      <Component
+        {...props}
+        router={{ location, navigate, params }}
+      />
+    );
+  }
+
+  return ComponentWithRouterProp;
+}
 
 const Login = (props) => {
  const [userName, setUser] = useState('');
  const [password, setPassword] = useState('');
  const navigate = useNavigate()
 
- function handleLogin(e) {
-   e.preventDefault();
-   setUser(e.target.value)
-   props.dispatch(setAuthedUser(userName, password))
-   navigate('/dashboard')
-}
+const handleLogin = (e) => {
+  e.preventDefault(e)
+  props.dispatch(setAuthedUser(userName));
+  console.log(userName);
+  if (props.path === "/" && userName !== "") {
+    navigate("/dashboard");
+  }
+};
+
+const handleChange = (e) => {
+  e.preventDefault();
+  setUser(e.target.value);
+  console.log(userName);
+  console.log(e.target.value);
+};
 
   return (
-    <CssVarsProvider>
-      <form onSubmit={handleLogin}>
-        <Sheet
+    <Container sx={{
+      mt: 3,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    }}>
+      <Typography level="h4" component="h1" sx={{ textAlign: "center"}}>
+        <b>Employee Polls</b>
+      </Typography>
+      <Typography level="body2" sx={{ textAlign: "center"}}>Sign in to continue</Typography>
+      <form type="submit" onSubmit={handleLogin}>
+        <TextField
+          type="email"
           variant="outlined"
-          sx={{
-            maxWidth: 400,
-            mx: 'auto', // margin left & right
-            my: 4, // margin top & botom
-            py: 3, // padding top & bottom
-            px: 2, // padding left & right
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-            borderRadius: 'sm',
-            boxShadow: 'md',
-          }}
+          margin="normal"
+          label="Email"
+          // required
+          fullWidth
+          onChange={handleChange}
         >
-          <div>
-            <Typography level="h4" component="h1" sx={{ textAlign: "center"}}>
-              <b>Employee Polls</b>
-            </Typography>
-            <Typography level="body2" sx={{ textAlign: "center"}}>Sign in to continue</Typography>
-          </div>
-          <TextField
-            // value={userName}
-            name="username"
-            type="text"
-            placeholder="username"
-            onChange={(e) => setUser(e.target.value)}
-          />
-          <TextField
-            value={password}
-            name="password"
-            type="password"
-            placeholder="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button type="submit">Login</Button>
-        </Sheet>
+        </TextField>
+        <TextField
+          type="password"
+          variant="outlined"
+          margin="normal"
+          label="Password"
+          // required
+          fullWidth
+        >
+        </TextField>
+        <Button
+          sx={{
+            mt: 2,
+            borderColor: "orange",
+            color: "orange"
+          }}
+          type="submit"
+          variant="outlined"
+          fullWidth
+        >Login
+        </Button>
       </form>
-    </CssVarsProvider>
+    </Container>
   );
 }
 
-const mapStateToProps = ({  authedUser, dispatch }) => {
+const mapStateToProps = ({}, props) => {
+  const path = props.router.location.pathname;
   return {
-    dispatch,
-    authedUser
-  }
-}
+    path,
+  };
+};
 
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));

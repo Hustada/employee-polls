@@ -1,12 +1,44 @@
 import { connect } from 'react-redux'
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
+import { useState, useEffect } from 'react';
+import { 
+  Box,
+  Typography,
+  Button,
+  Container,
+  Grid,
+  Avatar,
+} from '@mui/material';
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
-const Question = () => {
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return (
+      <Component
+        {...props}
+        router={{ location, navigate, params }}
+      />
+    );
+  }
+
+  return ComponentWithRouterProp;
+}
+
+const Question = (props) => {
+  const navigate = useNavigate();
+  const [vote, setVote] = useState("");
+  const [answered, setAnswered] = useState(false);
+
+  const question = props.questions[props.id];
+  const user = props.users[props.authedUser];
+  const avatar = question ? props.users[question.author].avatarURL : "";
+
   return (
   <Container>
     <Box sx={{ 
@@ -15,7 +47,7 @@ const Question = () => {
       alignItems: 'center',
       p: 10 }
     }>
-    <Typography variant="h4" >Poll By Jaffe Besos</Typography>
+    <Typography variant="h5" >Poll By Mark Fucking Hustad</Typography>
       <Avatar
         alt="Remy Sharp"
         src="./images/papa.jpeg"
@@ -43,7 +75,7 @@ const Question = () => {
         >
           <Typography variant="h6" sx={{ m: 1 }}>Be a moviestar?</Typography>
         </Box>
-        <Button variant="contained" fullWidth="true" sx={{ backgroundColor: "orange" }}>Click</Button>
+        <Button variant="contained" fullWidth sx={{ backgroundColor: "orange" }}>Click</Button>
       </Grid>
       <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <Box sx={{
@@ -64,7 +96,7 @@ const Question = () => {
         >
           <Typography variant="h6" sx={{ m: 1 }}>Be the President?</Typography>
         </Box>
-        <Button variant="contained" fullWidth="true" sx={{ backgroundColor: "orange" }}>Click</Button>
+        <Button variant="contained" fullWidth sx={{ backgroundColor: "orange" }}>Click</Button>
       </Grid>
       <Grid item xs={6}>
         
@@ -74,4 +106,16 @@ const Question = () => {
   )
 }
 
-export default Question
+const mapStateToProps = ({ authedUser, users, questions }, props ) => {
+  const { id } = props.router.params;
+
+  return {
+    loggedIn: authedUser === null,
+    id,
+    questions,
+    users,
+    authedUser,
+  };
+};
+
+export default withRouter (connect(mapStateToProps)(Question));

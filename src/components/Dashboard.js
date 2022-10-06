@@ -6,8 +6,13 @@ import QuestionCard from './QuestionCard';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
 import { randomDate } from '../utils/helpers';
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 const Dashboard = (props) => {
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <Container sx={{ mt: 5 }} >
       <Typography 
