@@ -30,7 +30,7 @@ function withRouter(Component) {
   return ComponentWithRouterProp;
 }
 
-const Question = (props) => {
+const ShowQuestion = (props) => {
   const navigate = useNavigate();
   const [vote, setVote] = useState("");
   const [answered, setAnswered] = useState(false);
@@ -47,7 +47,7 @@ const Question = (props) => {
       alignItems: 'center',
       p: 10 }
     }>
-    <Typography variant="h5" >Poll By Mark Fucking Hustad</Typography>
+    <Typography variant="h5" >Poll By Mark </Typography>
       <Avatar
         alt="Remy Sharp"
         src="./images/papa.jpeg"
@@ -118,4 +118,4 @@ const mapStateToProps = ({ authedUser, users, questions }, props ) => {
   };
 };
 
-export default withRouter (connect(mapStateToProps)(Question));
+export default withRouter (connect(mapStateToProps)(ShowQuestion));

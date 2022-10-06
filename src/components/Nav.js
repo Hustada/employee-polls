@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,10 +14,24 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import PollIcon from '@mui/icons-material/Poll';
 
-const pages = ['Home', 'Leaderboard', 'New'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const routes = [
+  {
+    name: 'Home',
+    path: '/'
+  },
+  {
+    name: 'Leaderboard',
+    path: '/leaderboard'
+  },
+  {
+    name: 'New',
+    path: '/add'
+  }
+]
 
 const Nav = () => {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -87,9 +102,9 @@ const Nav = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {routes.map(({ name, path }) => (
+                <MenuItem key={name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Blah</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -114,13 +129,13 @@ const Nav = () => {
             Employee Polls
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {routes.map(({ name, path }) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={name}
+                onClick={handleCloseNavMenu, () => navigate(`${path}`)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {name}
               </Button>
             ))}
           </Box>

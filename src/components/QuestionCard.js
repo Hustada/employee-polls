@@ -16,12 +16,16 @@ function getDate(timestamp) {
 }
 
 const QuestionCard = ({ questions, id }) => {
+  const questionIDs = Object.keys(questions);
+  console.log(questionIDs);
+
   return (
     <Grid item  xs={12} sm={6} md={3}>
       <Paper elevation={12} align="center" style={{padding: 6}}>
         <Typography variant='h6' align="center">{questions[id].author}</Typography>
         <Typography variant='body2' align="center" sx={{ fontStyle: 'italic' }}>{getDate(questions[id].timestamp)}</Typography>
-        <Button 
+        <Button
+          // onClick={showID}
           variant="outlined"
           size="small"
           fullWidth

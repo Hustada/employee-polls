@@ -9,7 +9,7 @@ const AUTHED_ID = "markhustad";
 export function handleInitialData() {
   return (dispatch) => {
     dispatch(showLoading());
-    return getInitialData().then(({ users, questions }) => {
+    return getInitialData().then(({ users, questions, authedUser }) => {
       dispatch(receiveUsers(users));
       dispatch(receiveQuestions(questions));
       dispatch(setAuthedUser(null));
