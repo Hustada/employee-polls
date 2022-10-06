@@ -12,25 +12,27 @@ import ShowQuestion from "./ShowQuestion";
 const App = (props) => {
   useEffect(() => {
     props.dispatch(handleInitialData())
-  },[]);
+  },[props]);
 
   return (
     <div>
       <LoadingBar />
         <Nav />
-      {props.loading === true ? null : (
+        {props.loading === true ? null : (
         <Routes>
-          <Route path="/question/" exact element={ <ShowQuestion />} />
-          <Route path="/" exact element={ <Login /> } />
-          <Route path="/home" exact element={<Dashboard />} />
+          <Route path="/question/:id" element={ <ShowQuestion />} />
+          <Route path="/login" element={ <Login /> } />
+          <Route path="/" element={<Dashboard />} />
         </Routes>
       )}
     </div>
   )
 }
 
-const mapStateToProps = ({ authedUser }) => ({
-  loading: authedUser === null,
-});
+const mapStateToProps = ({ authedUser }) => {
+  return {
+    login: authedUser,
+  };
+};
 
 export default connect()(App);

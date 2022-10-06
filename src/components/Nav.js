@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -30,7 +31,8 @@ const routes = [
   }
 ]
 
-const Nav = () => {
+const Nav = (authedUser) => {
+
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -104,7 +106,7 @@ const Nav = () => {
             >
               {routes.map(({ name, path }) => (
                 <MenuItem key={name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Blah</Typography>
+                  <Typography textAlign="center">{name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -174,4 +176,10 @@ const Nav = () => {
     </AppBar>
   );
 };
-export default Nav;
+
+const mapStateToProps = ( authedUser ) => {
+  return {
+    authedUser,
+  };
+}
+export default connect(mapStateToProps)(Nav);

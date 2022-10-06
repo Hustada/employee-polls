@@ -46,8 +46,8 @@ const handleLogin = (e) => {
   e.preventDefault(e)
   props.dispatch(setAuthedUser(userName));
   console.log(userName);
-  if (props.path === "/" && userName !== "") {
-    navigate("/dashboard");
+  if (props.path === "/login" && userName !== "") {
+    navigate("/");
   }
 };
 

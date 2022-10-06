@@ -14,30 +14,14 @@ import {
   useParams,
 } from "react-router-dom";
 
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return (
-      <Component
-        {...props}
-        router={{ location, navigate, params }}
-      />
-    );
-  }
-
-  return ComponentWithRouterProp;
-}
 
 const ShowQuestion = (props) => {
+  const { questions, users, authedUser, dispatch } = props;
   const navigate = useNavigate();
-  const [vote, setVote] = useState("");
-  const [answered, setAnswered] = useState(false);
+  const params = useParams();
+  const id = params.id;
 
-  const question = props.questions[props.id];
-  const user = props.users[props.authedUser];
-  const avatar = question ? props.users[question.author].avatarURL : "";
+  console.log(params);
 
   return (
   <Container>
@@ -47,7 +31,7 @@ const ShowQuestion = (props) => {
       alignItems: 'center',
       p: 10 }
     }>
-    <Typography variant="h5" >Poll By Mark </Typography>
+    <Typography variant="h5" >Poll By Question.</Typography>
       <Avatar
         alt="Remy Sharp"
         src="./images/papa.jpeg"
@@ -106,16 +90,12 @@ const ShowQuestion = (props) => {
   )
 }
 
-const mapStateToProps = ({ authedUser, users, questions }, props ) => {
-  const { id } = props.router.params;
-
+const mapStateToProps = ({ authedUser, users, questions }) => {
   return {
-    loggedIn: authedUser === null,
-    id,
     questions,
     users,
     authedUser,
   };
 };
 
-export default withRouter (connect(mapStateToProps)(ShowQuestion));
+export default (connect(mapStateToProps)(ShowQuestion));

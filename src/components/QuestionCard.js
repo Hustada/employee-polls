@@ -1,13 +1,17 @@
 import { connect } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { formatDate, formatQuestion } from "../utils/helpers"
 import * as React from 'react';
-// import { formatQuestion, formatDate } from '../utils/helpers';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import {
+  Grid,
+  Paper,
+  Container,
+  Typography,
+  Button,
+  Avatar
+} from '@mui/material';
 
-const niceLookingDate = new Date().toDateString();
+// const niceLookingDate = new Date().toDateString();
 
 function getDate(timestamp) {
   const date = new Date(timestamp)
@@ -15,17 +19,18 @@ function getDate(timestamp) {
   return "" + time + " | " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
 }
 
-const QuestionCard = ({ questions, id }) => {
-  const questionIDs = Object.keys(questions);
-  console.log(questionIDs);
+const QuestionCard = (props) => {
+  const { questions, users, id } = props;
+  const question = formatQuestion(questions[id], users[questions[id].author]);
+  const navigate = useNavigate();
 
   return (
     <Grid item  xs={12} sm={6} md={3}>
       <Paper elevation={12} align="center" style={{padding: 6}}>
+        <Avatar src={question.avatar} />
         <Typography variant='h6' align="center">{questions[id].author}</Typography>
         <Typography variant='body2' align="center" sx={{ fontStyle: 'italic' }}>{getDate(questions[id].timestamp)}</Typography>
         <Button
-          // onClick={showID}
           variant="outlined"
           size="small"
           fullWidth
@@ -34,6 +39,7 @@ const QuestionCard = ({ questions, id }) => {
             color: 'orange',
             borderColor: 'orange'
           }}
+          onClick={(e) => navigate(`/questions/${question.id}`)}
         >
           Show
         </Button>
@@ -42,9 +48,11 @@ const QuestionCard = ({ questions, id }) => {
   );
 }
 
-const mapStateToProps = ({ questions }) => (
+const mapStateToProps = ({ questions, users }, { id }) => (
   {
-    questions: questions
+    questions,
+    users,
+    id
   }
 )
 
