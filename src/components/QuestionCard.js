@@ -11,8 +11,6 @@ import {
   Avatar
 } from '@mui/material';
 
-// const niceLookingDate = new Date().toDateString();
-
 function getDate(timestamp) {
   const date = new Date(timestamp)
   const time = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })

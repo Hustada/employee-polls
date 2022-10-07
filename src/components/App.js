@@ -20,7 +20,7 @@ const App = (props) => {
         <Nav />
         {props.loading === true ? null : (
         <Routes>
-          <Route path="/question/:id" element={ <ShowQuestion />} />
+          <Route path="/questions/:id" element={ <ShowQuestion />} />
           <Route path="/login" element={ <Login /> } />
           <Route path="/" element={<Dashboard />} />
         </Routes>

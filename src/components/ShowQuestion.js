@@ -13,6 +13,7 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import { formatDate, formatQuestion } from '../utils/helpers';
 
 
 const ShowQuestion = (props) => {
@@ -20,8 +21,12 @@ const ShowQuestion = (props) => {
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
-
+  console.log(authedUser);
+  console.log(id)
   console.log(params);
+  console.log(users);
+  console.log(questions[id]);
+
 
   return (
   <Container>
@@ -31,7 +36,7 @@ const ShowQuestion = (props) => {
       alignItems: 'center',
       p: 10 }
     }>
-    <Typography variant="h5" >Poll By Question.</Typography>
+    <Typography variant="h5" >Poll By </Typography>
       <Avatar
         alt="Remy Sharp"
         src="./images/papa.jpeg"
