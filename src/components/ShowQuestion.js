@@ -25,7 +25,6 @@ const ShowQuestion = (props) => {
   console.log(id)
   console.log(params);
   console.log(users);
-  console.log(questions[id]);
 
 
   return (

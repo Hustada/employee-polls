@@ -6,10 +6,9 @@ import {
   useLocation,
   useParams 
 } from 'react-router-dom';
-// import Select from '@mui/material/Select';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import Select, { selectClasses } from '@mui/joy/Select';
 import {
+  Select,
   Button,
   Box,
   InputLabel,
@@ -39,21 +38,22 @@ const withRouter = (Component)  => {
 
 const Login = (props) => {
  const [userName, setUser] = useState('');
- const [password, setPassword] = useState('');
+ const [disable, setDisable] = useState(true);
  const navigate = useNavigate()
 
 const handleLogin = (e) => {
   e.preventDefault(e)
   props.dispatch(setAuthedUser(userName));
   console.log(userName);
-  if (props.path === "/login" && userName !== "") {
-    navigate("/");
+  if (props.path === "/") {
+    navigate("/home");
   }
 };
 
 const handleChange = (e) => {
   e.preventDefault();
   setUser(e.target.value);
+  setDisable(false);
   console.log(userName);
   console.log(e.target.value);
 };
@@ -69,38 +69,36 @@ const handleChange = (e) => {
         <b>Employee Polls</b>
       </Typography>
       <Typography level="body2" sx={{ textAlign: "center"}}>Sign in to continue</Typography>
-      <form type="submit" onSubmit={handleLogin}>
-        <TextField
-          type="email"
+      <FormControl fullWidth>
+        <Select
+          type="select"
           variant="outlined"
-          margin="normal"
-          label="Email"
-          // required
+          label="User"
           fullWidth
+          value={userName}
           onChange={handleChange}
         >
-        </TextField>
-        <TextField
-          type="password"
-          variant="outlined"
-          margin="normal"
-          label="Password"
-          // required
-          fullWidth
-        >
-        </TextField>
+          <MenuItem value={"mtsamis"}>Mike Tsamis</MenuItem>
+          <MenuItem value={"sarahedo"}>Sarah Edo</MenuItem>
+          <MenuItem value={"tylermcginnis"}>Tyler McGinnis</MenuItem>
+          <MenuItem value={"zoshikanlu"}>Zenobia Oshikanlu</MenuItem>
+        </Select>
+        </FormControl>
         <Button
           sx={{
             mt: 2,
-            borderColor: "orange",
-            color: "orange"
+            color: "orange",
+            borderColor: "orange"
           }}
-          type="submit"
           variant="outlined"
+          data-testid="button"
           fullWidth
-        >Login
+          onClick={handleLogin}
+          disabled={disable}
+        >
+          Login
         </Button>
-      </form>
+      
     </Container>
   );
 }
