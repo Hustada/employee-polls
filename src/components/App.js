@@ -31,8 +31,8 @@ const App = (props) => {
 
 const mapStateToProps = ({ authedUser }) => {
   return {
-    login: authedUser,
+    loggedIn: !(authedUser === null),
   };
 };
 
-export default connect(mapStateToProps)(App);
+export default (connect(mapStateToProps)(App));
