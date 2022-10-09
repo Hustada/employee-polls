@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { setAuthedUser } from '../actions/authedUser';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -31,11 +32,18 @@ const routes = [
   }
 ]
 
-const Nav = (authedUser) => {
+const Nav = (props) => {
 
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleLogout = () => {
+    props.dispatch(setAuthedUser(null));
+    navigate('/');
+  }
+
+  console.log(settings);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

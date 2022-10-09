@@ -19,33 +19,19 @@ import {
   Container,
 } from '@mui/material'
 
-
-const withRouter = (Component)  => {
-  const ComponentWithRouterProp = (props) => {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return (
-      <Component
-        {...props}
-        router={{ location, navigate, params }}
-      />
-    );
-  }
-
-  return ComponentWithRouterProp;
-}
-
-const Login = (props) => {
+const Login = ( { authedUser, dispatch }) => {
  const [userName, setUser] = useState('');
  const [disable, setDisable] = useState(true);
  const navigate = useNavigate()
+ const location = useLocation()
+ const path = location.pathname;
+
+ console.log('location:', location, 'path:', path);
 
 const handleLogin = (e) => {
   e.preventDefault(e)
-  props.dispatch(setAuthedUser(userName));
-  console.log(userName);
-  if (props.path === "/") {
+  dispatch(setAuthedUser(userName));
+  if (path === "/") {
     navigate("/home");
   }
 };
@@ -55,7 +41,6 @@ const handleChange = (e) => {
   setUser(e.target.value);
   setDisable(false);
   console.log(userName);
-  console.log(e.target.value);
 };
 
   return (
@@ -103,11 +88,10 @@ const handleChange = (e) => {
   );
 }
 
-const mapStateToProps = ({}, props) => {
-  const path = props.router.location.pathname;
+const mapStateToProps = ({ authedUser, dispatch }) => {
   return {
-    path,
+    authedUser,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Login));
+export default (connect(mapStateToProps)(Login));

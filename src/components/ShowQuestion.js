@@ -21,11 +21,7 @@ const ShowQuestion = (props) => {
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
-  console.log(authedUser);
-  console.log(id)
-  console.log(params);
-  console.log(users);
-
+  console.log(props.authedUser);
 
   return (
   <Container>
