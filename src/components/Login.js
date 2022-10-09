@@ -17,31 +17,48 @@ import {
   Typography,
   TextField,
   Container,
+  List,
+  ListItemText,
 } from '@mui/material'
+import questions from '../reducers/questions';
 
-const Login = ( { authedUser, dispatch }) => {
- const [userName, setUser] = useState('');
- const [disable, setDisable] = useState(true);
+const Login = ( { authedUser, dispatch, users }) => {
+//  const [userName, setUser] = useState('');
+//  const [password, setPassword] = useState('');
+//  const [disable, setDisable] = useState(true);
+
+const [form, setForm] = useState({
+  username: '',
+  password: '',
+})
+
  const navigate = useNavigate()
  const location = useLocation()
  const path = location.pathname;
 
- console.log('location:', location, 'path:', path);
-
 const handleLogin = (e) => {
   e.preventDefault(e)
-  dispatch(setAuthedUser(userName));
+  dispatch(setAuthedUser(form.username));
   if (path === "/") {
     navigate("/home");
   }
 };
 
+// const handleChange = (e) => {
+//   e.preventDefault();
+//   setUser(e.target.value);
+//   setPassword(e.target.value)
+//   setDisable(false);
+//   console.log(userName);
+//   console.log(password);
+// };
+
 const handleChange = (e) => {
   e.preventDefault();
-  setUser(e.target.value);
-  setDisable(false);
-  console.log(userName);
-};
+  setForm({...form, [e.target.name]: e.target.value});
+  console.log(form);
+}
+
 
   return (
     <Container sx={{
@@ -49,26 +66,34 @@ const handleChange = (e) => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      gap: 2,
     }}>
       <Typography level="h4" component="h1" sx={{ textAlign: "center"}}>
         <b>Employee Polls</b>
       </Typography>
       <Typography level="body2" sx={{ textAlign: "center"}}>Sign in to continue</Typography>
-      <FormControl fullWidth>
-        <Select
-          type="select"
-          variant="outlined"
-          label="User"
-          fullWidth
-          value={userName}
+      <Typography> Allowed Users </Typography>
+      <List>
+        <ListItemText>Username: sarahedo, Password: password123 </ListItemText>
+        <ListItemText>Username: tylermcginnis, Password: abc321 </ListItemText>
+        <ListItemText>Username: zoshikanlu, Password: pass246</ListItemText>
+        <ListItemText>Username: mtsamis, Password: xyz123 </ListItemText>
+      </List>
+      <FormControl>
+        <TextField
+          name="username"
+          placeholder='Enter username'
+          type="text"
           onChange={handleChange}
         >
-          <MenuItem value={"mtsamis"}>Mike Tsamis</MenuItem>
-          <MenuItem value={"sarahedo"}>Sarah Edo</MenuItem>
-          <MenuItem value={"tylermcginnis"}>Tyler McGinnis</MenuItem>
-          <MenuItem value={"zoshikanlu"}>Zenobia Oshikanlu</MenuItem>
-        </Select>
-        </FormControl>
+        </TextField>
+        <TextField
+          name="password"
+          placeholder='Enter password'
+          type="password"
+          onChange={handleChange}
+        >
+        </TextField>
         <Button
           sx={{
             mt: 2,
@@ -76,21 +101,23 @@ const handleChange = (e) => {
             borderColor: "orange"
           }}
           variant="outlined"
-          data-testid="button"
           fullWidth
+          // disabled={disable}
           onClick={handleLogin}
-          disabled={disable}
         >
           Login
         </Button>
-      
+        </FormControl>
     </Container>
   );
 }
 
-const mapStateToProps = ({ authedUser, dispatch }) => {
+const mapStateToProps = ({ authedUser, dispatch, users, questions }) => {
   return {
     authedUser,
+    dispatch,
+    users,
+    questions,
   };
 };
 
