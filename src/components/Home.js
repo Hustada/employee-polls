@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { randomDate } from '../utils/helpers';
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 
-const Dashboard = (props) => {
+const Home = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -57,4 +57,4 @@ const mapStateToProps = ({ questions }) => ({
   ),
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(Home);

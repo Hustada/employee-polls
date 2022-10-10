@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleInitialData } from '../actions/shared'
-import Dashboard from "./Dashboard";
+import Home from "./Home";
 import Nav from "./Nav";
 import Login from "./Login";
 import "../App.css"
@@ -22,7 +22,7 @@ const App = (props) => {
         <Routes>
           <Route path="/questions/:id" element={ <ShowQuestion />} />
           <Route path="/" element={ <Login /> } />
-          <Route path="/home" element={<Dashboard />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       )}
     </div>

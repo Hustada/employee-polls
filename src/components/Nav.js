@@ -43,7 +43,7 @@ const Nav = (props) => {
     navigate('/');
   }
 
-  console.log(settings);
+  // console.log(settings.map());
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

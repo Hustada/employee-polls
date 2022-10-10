@@ -1,6 +1,6 @@
 import { setAuthedUser } from '../actions/authedUser';
 import { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { 
   useNavigate,
   useLocation,
@@ -22,43 +22,28 @@ import {
 } from '@mui/material'
 import questions from '../reducers/questions';
 
-const Login = ( { authedUser, dispatch, users }) => {
-//  const [userName, setUser] = useState('');
-//  const [password, setPassword] = useState('');
-//  const [disable, setDisable] = useState(true);
+const Login = ( { authedUser, users }) => {
+const [username, setUsername] = useState('');
+const [password, setPassword] = useState('');
+const dispatch = useDispatch();
 
-const [form, setForm] = useState({
-  username: '',
-  password: '',
-})
-
- const navigate = useNavigate()
- const location = useLocation()
+ const navigate = useNavigate();
+ const location = useLocation();
  const path = location.pathname;
 
 const handleLogin = (e) => {
   e.preventDefault(e)
-  dispatch(setAuthedUser(form.username));
+  
+  dispatch(
+    setAuthedUser({
+      username: username,
+      password: password,
+    })
+  )
   if (path === "/") {
     navigate("/home");
   }
 };
-
-// const handleChange = (e) => {
-//   e.preventDefault();
-//   setUser(e.target.value);
-//   setPassword(e.target.value)
-//   setDisable(false);
-//   console.log(userName);
-//   console.log(password);
-// };
-
-const handleChange = (e) => {
-  e.preventDefault();
-  setForm({...form, [e.target.name]: e.target.value});
-  console.log(form);
-}
-
 
   return (
     <Container sx={{
@@ -79,19 +64,24 @@ const handleChange = (e) => {
         <ListItemText>Username: zoshikanlu, Password: pass246</ListItemText>
         <ListItemText>Username: mtsamis, Password: xyz123 </ListItemText>
       </List>
-      <FormControl>
+      <FormControl onSubmit={handleLogin}>
         <TextField
+        sx={{ m: 2 }}
+          type="username"
           name="username"
+          value={username}
           placeholder='Enter username'
           type="text"
-          onChange={handleChange}
+          onChange={(e) => setUsername(e.target.value)}
         >
         </TextField>
         <TextField
+        sx={{ m: 2 }}
           name="password"
           placeholder='Enter password'
           type="password"
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         >
         </TextField>
         <Button
@@ -102,7 +92,7 @@ const handleChange = (e) => {
           }}
           variant="outlined"
           fullWidth
-          // disabled={disable}
+          type="submit"
           onClick={handleLogin}
         >
           Login
