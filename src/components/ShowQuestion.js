@@ -13,14 +13,24 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { formatDate, formatQuestion } from '../utils/helpers';
+
+const withRouter = (Component) => {
+  const ComponentWithRouterProp = (props) => {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  };
+
+  return ComponentWithRouterProp;
+};
 
 
 const ShowQuestion = (props) => {
-  const { questions, users, authedUser, dispatch } = props;
-  const navigate = useNavigate();
-  const params = useParams();
-  const id = params.id;
+  const question = props.questions[props.id];
+  console.log(question);
 
   return (
   <Container>
@@ -89,12 +99,14 @@ const ShowQuestion = (props) => {
   )
 }
 
-const mapStateToProps = ({ authedUser, users, questions }) => {
+const mapStateToProps = ({ authedUser, users, questions }, props) => {
+  const { id } = props.router.params;
   return {
     questions,
+    id,
     users,
     authedUser,
   };
 };
 
-export default (connect(mapStateToProps)(ShowQuestion));
+export default withRouter(connect(mapStateToProps)(ShowQuestion));
