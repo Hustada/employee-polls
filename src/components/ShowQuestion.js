@@ -29,9 +29,19 @@ const withRouter = (Component) => {
 
 
 const ShowQuestion = (props) => {
-  const question = props.questions[props.id];
-  console.log(question);
+  const [vote, setVote] = useState('');
+  const [answer, setAnswer] = useState(false);
 
+
+  const { users, questions, id } = props;
+  const question = props.questions[props.id];
+  const user = props.users[props.authedUser];
+  const avatar = question ? props.users[question.author].avatarURL : "";
+
+  const handleVoteAnswer = (e) => {
+    e.preventDefault(e);
+
+  }
   return (
   <Container>
     <Box sx={{ 
@@ -40,10 +50,10 @@ const ShowQuestion = (props) => {
       alignItems: 'center',
       p: 10 }
     }>
-    <Typography variant="h5" >Poll By </Typography>
+    <Typography variant="h5" >Poll By {question.author} </Typography>
       <Avatar
         alt="Remy Sharp"
-        src="./images/papa.jpeg"
+        src={avatar}
         sx={{ width: 300, height: 300, alignItems: "center", m: 3}}
       />
       <Typography variant='h5'>Would You Rather?</Typography>
@@ -66,9 +76,17 @@ const ShowQuestion = (props) => {
           alignItems="center"
           fontSize={24}
         >
-          <Typography variant="h6" sx={{ m: 1 }}>Be a moviestar?</Typography>
+          <Typography variant="h6" sx={{ m: 1 }}>{question.optionOne.text}?</Typography>
         </Box>
-        <Button variant="contained" fullWidth sx={{ backgroundColor: "orange" }}>Click</Button>
+        <Button
+          sx={{ backgroundColor: "orange" }}
+          variant="contained"
+          fullWidth
+          onClick={handleVoteAnswer}
+          setVote
+        >
+          Click
+        </Button>
       </Grid>
       <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <Box sx={{
@@ -87,7 +105,7 @@ const ShowQuestion = (props) => {
           alignItems="center"
           fontSize={24}
         >
-          <Typography variant="h6" sx={{ m: 1 }}>Be the President?</Typography>
+          <Typography variant="h6" sx={{ m: 1 }}>{question.optionTwo.text}?</Typography>
         </Box>
         <Button variant="contained" fullWidth sx={{ backgroundColor: "orange" }}>Click</Button>
       </Grid>

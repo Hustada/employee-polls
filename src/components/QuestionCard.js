@@ -21,7 +21,6 @@ const QuestionCard = (props) => {
   const { questions, users, id } = props;
   const question = formatQuestion(questions[id], users[questions[id].author]);
   const navigate = useNavigate();
-  console.log(question);
 
   return (
     <Grid item  xs={12} sm={6} md={3}>
@@ -38,7 +37,7 @@ const QuestionCard = (props) => {
             color: 'orange',
             borderColor: 'orange'
           }}
-          onClick={(e) => navigate(`/questions/${question.id}`)}
+          onClick={(e) => navigate(`/questions/${props.id}`)}
         >
           Show
         </Button>
