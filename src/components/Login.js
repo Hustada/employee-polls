@@ -21,6 +21,7 @@ import {
   ListItemText,
 } from '@mui/material'
 import questions from '../reducers/questions';
+import { Sheet } from '@mui/joy';
 
 const Login = ( { authedUser, users }) => {
 const [username, setUsername] = useState('');
@@ -46,13 +47,21 @@ const handleLogin = (e) => {
 };
 
   return (
-    <Container sx={{
-      mt: 3,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
+    <Container
+    variant="outlined"
+    sx={{
+      maxWidth: 400,
+      mx: 'auto', // margin left & right
+      my: 4, // margin top & botom
+      py: 3, // padding top & bottom
+      px: 2, // padding left & right
+      display: 'flex',
+      flexDirection: 'column',
       gap: 2,
-    }}>
+      borderRadius: 'sm',
+      boxShadow: 'md',
+    }}
+    >
       <Typography level="h4" component="h1" sx={{ textAlign: "center"}}>
         <b>Employee Polls</b>
       </Typography>
@@ -64,9 +73,11 @@ const handleLogin = (e) => {
         <ListItemText>Username: zoshikanlu, Password: pass246</ListItemText>
         <ListItemText>Username: mtsamis, Password: xyz123 </ListItemText>
       </List>
-      <FormControl onSubmit={handleLogin}>
+      <FormControl>
         <TextField
-        sx={{ m: 2 }}
+          sx={{ 
+            maxWidth: 400,
+          }}
           type="username"
           name="username"
           value={username}
@@ -76,7 +87,7 @@ const handleLogin = (e) => {
         >
         </TextField>
         <TextField
-        sx={{ m: 2 }}
+        sx={{ mt: 2 }}
           name="password"
           placeholder='Enter password'
           type="password"
@@ -97,7 +108,7 @@ const handleLogin = (e) => {
         >
           Login
         </Button>
-        </FormControl>
+      </FormControl>
     </Container>
   );
 }
