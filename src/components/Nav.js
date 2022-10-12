@@ -33,6 +33,7 @@ const routes = [
 ]
 
 const Nav = (props) => {
+  console.log(props.authedUser);
 
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
