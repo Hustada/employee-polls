@@ -5,6 +5,7 @@ import { handleInitialData } from '../actions/shared'
 import Home from "./Home";
 import Nav from "./Nav";
 import Login from "./Login";
+import NewQuestion from "./NewQuestion";
 import "../App.css"
 import LoadingBar from "react-redux-loading-bar";
 import ShowQuestion from "./ShowQuestion";
@@ -26,6 +27,7 @@ const App = ({dispatch, authedUser, loading}) => {
           <Routes>
             <Route path="/questions/:id" element={ <ShowQuestion />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/new" element={<NewQuestion />} />
           </Routes>
             )}
         </div>
