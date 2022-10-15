@@ -13,8 +13,14 @@ const NewQuestion = (props) => {
 
   return (  
     <div>
-      <Container>
+      <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
         <Typography variant="h6">Create Your Own Poll</Typography>
+        <Typography variant="h4">Would You Rather</Typography>
       </Container>
     </div>
   )

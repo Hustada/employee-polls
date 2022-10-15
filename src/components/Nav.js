@@ -23,7 +23,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const routes = [
   {
     name: 'Home',
-    path: '/'
+    path: '/home'
   },
   {
     name: 'Leaderboard',
@@ -31,7 +31,7 @@ const routes = [
   },
   {
     name: 'New',
-    path: '/add'
+    path: '/new'
   }
 ]
 
