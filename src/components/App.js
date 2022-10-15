@@ -9,21 +9,26 @@ import "../App.css"
 import LoadingBar from "react-redux-loading-bar";
 import ShowQuestion from "./ShowQuestion";
 
-const App = (props) => {
+const App = ({dispatch, authedUser, loading}) => {
   useEffect(() => {
-    props.dispatch(handleInitialData())
-  },[props]);
+    dispatch(handleInitialData())
+  },[dispatch]);
 
   return (
     <div>
-      <LoadingBar />
-        <Nav />
-        {props.loading === true ? null : (
-        <Routes>
-          <Route path="/questions/:id" element={ <ShowQuestion />} />
-          <Route path="/" element={ <Login /> } />
-          <Route path="/home" element={<Home />} />
-        </Routes>
+     {authedUser === null ? (
+        <Login />
+      ) : (
+        <div>
+        <LoadingBar />
+          <Nav />
+            {loading === true ? null : (
+          <Routes>
+            <Route path="/questions/:id" element={ <ShowQuestion />} />
+            <Route path="/home" element={<Home />} />
+          </Routes>
+            )}
+        </div>
       )}
     </div>
   )
@@ -31,7 +36,7 @@ const App = (props) => {
 
 const mapStateToProps = ({ authedUser }) => {
   return {
-    loggedIn: !(authedUser === null),
+    authedUser,
   };
 };
 

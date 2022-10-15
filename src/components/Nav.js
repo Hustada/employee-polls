@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from "react";
 import { connect } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { setAuthedUser } from '../actions/authedUser';
@@ -33,7 +33,7 @@ const routes = [
 ]
 
 const Nav = (props) => {
-  console.log(props.authedUser.avatarURL);
+  // console.log(props.authedUser.avatarURL);
 
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -58,6 +58,8 @@ const Nav = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const avatar = props.authedUser.avatarURL;
 
   return (
     <AppBar sx={{bgcolor: "black" }} position="static">
@@ -152,7 +154,7 @@ const Nav = (props) => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Papa" src={props.authedUser.avatarURL} />
+                <Avatar alt="Papa" src={avatar} />
               </IconButton>
             </Tooltip>
             <Menu
