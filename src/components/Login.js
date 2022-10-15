@@ -1,4 +1,5 @@
 import { setAuthedUser } from '../actions/authedUser';
+import { _getUser } from '../utils/api'
 import { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { 
@@ -6,13 +7,8 @@ import {
   useLocation,
   useParams 
 } from 'react-router-dom';
-import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import {
-  Select,
   Button,
-  Box,
-  InputLabel,
-  MenuItem,
   FormControl,
   Typography,
   TextField,
@@ -20,13 +16,13 @@ import {
   List,
   ListItemText,
 } from '@mui/material'
-import questions from '../reducers/questions';
-import { Sheet } from '@mui/joy';
 
-const Login = ( { authedUser, users }) => {
-const [username, setUsername] = useState('');
-const [password, setPassword] = useState('');
-const dispatch = useDispatch();
+const Login = (props) => {
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
  const navigate = useNavigate();
  const location = useLocation();
@@ -34,13 +30,22 @@ const dispatch = useDispatch();
 
 const handleLogin = (e) => {
   e.preventDefault(e)
-  
-  dispatch(
-    setAuthedUser({
-      username: username,
-      password: password,
-    })
-  )
+
+  if (!username || !password) {
+    setError(true);
+    alert("set username and password");
+  } else {
+    _getUser(username, password).then((user) => {
+      if (user) {
+        setError(false);
+        setErrorMessage("");
+        props.dispatch(setAuthedUser(user));
+      } else {
+        setError(true);
+        setErrorMessage("Incorrect username or password");
+      }
+    });
+  }
   if (path === "/") {
     navigate("/home");
   }
@@ -113,13 +118,6 @@ const handleLogin = (e) => {
   );
 }
 
-const mapStateToProps = ({ authedUser, dispatch, users, questions }) => {
-  return {
-    authedUser,
-    dispatch,
-    users,
-    questions,
-  };
-};
+const mapStateToProps = (props) => props;
 
 export default (connect(mapStateToProps)(Login));
