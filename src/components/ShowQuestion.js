@@ -29,7 +29,7 @@ const withRouter = (Component) => {
 
 
 const ShowQuestion = (props) => {
-  const [vote, setVote] = useState('');
+  // const [vote, setVote] = useState('');
   const [answer, setAnswer] = useState(false);
 
 
@@ -83,7 +83,6 @@ const ShowQuestion = (props) => {
           variant="contained"
           fullWidth
           onClick={handleVoteAnswer}
-          setVote
         >
           Click
         </Button>

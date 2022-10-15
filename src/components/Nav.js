@@ -33,7 +33,7 @@ const routes = [
 ]
 
 const Nav = (props) => {
-  console.log(props.authedUser);
+  console.log(props.authedUser.avatarURL);
 
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -43,8 +43,6 @@ const Nav = (props) => {
     props.dispatch(setAuthedUser(null));
     navigate('/');
   }
-
-  // console.log(settings.map());
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -154,7 +152,7 @@ const Nav = (props) => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Papa" src="./images/papa.jpeg" />
+                <Avatar alt="Papa" src={props.authedUser.avatarURL} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -186,7 +184,7 @@ const Nav = (props) => {
   );
 };
 
-const mapStateToProps = ( authedUser ) => {
+const mapStateToProps = ( { authedUser }, props ) => {
   return {
     authedUser,
   };

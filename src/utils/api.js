@@ -1,4 +1,4 @@
-import { _getUsers, _getQuestions, _saveQuestion, _saveQuestionAnswer } from "./_DATA.js";
+import { _getUsers, _getQuestions, _saveQuestion, _saveQuestionAnswer, allUsers } from "./_DATA.js";
 
 export function getInitialData () {
   return Promise.all([
@@ -10,3 +10,17 @@ export function getInitialData () {
   }))
 }
 
+export function _getUser(userId, password) {
+
+  return new Promise((resolve) => {
+    setTimeout(
+      () =>
+        resolve(
+          allUsers
+            .filter((user) => user.id === userId && user.password === password)
+            .pop()
+        ),
+      1000
+    );
+  });
+}
