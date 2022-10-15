@@ -6,6 +6,7 @@ import {
   Menu,
   Container,
   Button,
+  Grid,
 } from '@mui/material';
 
 const NewQuestion = (props) => {
@@ -21,6 +22,14 @@ const NewQuestion = (props) => {
       }}>
         <Typography variant="h6">Create Your Own Poll</Typography>
         <Typography variant="h4">Would You Rather</Typography>
+      <Grid Container spacing="3">
+        <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+        </Grid>
+        <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+        </Grid>
+      </Grid>
       </Container>
     </div>
   )
