@@ -13,13 +13,10 @@ import {
   FormControl
 } from '@mui/material';
 
-const NewQuestion = ({dispatch}, props) => {
+const NewQuestion = ({ dispatch, authedUser }) => {
   const [optionOne, setOptionOne] = useState('')
   const [optionTwo, setOptionTwo] = useState('')
   const navigate = useNavigate();
-  console.log(props.authedUser);
-
-
 
   const handleOptionOne = (e) => {
     e.preventDefault();
@@ -40,7 +37,7 @@ const NewQuestion = ({dispatch}, props) => {
     const question = {
       optionOneText: optionOne,
       optionTwoText: optionTwo,
-      author: props.authedUser
+      author: authedUser
     }
 
     dispatch(handleAddQuestion(question));
