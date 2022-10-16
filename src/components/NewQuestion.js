@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { handleAddQuestion } from '../actions/questions';
 import {
   Box,
   Typography,
@@ -11,8 +13,40 @@ import {
   FormControl
 } from '@mui/material';
 
-const NewQuestion = (props) => {
+const NewQuestion = ({dispatch}, props) => {
+  const [optionOne, setOptionOne] = useState('')
+  const [optionTwo, setOptionTwo] = useState('')
+  const navigate = useNavigate();
   console.log(props.authedUser);
+
+
+
+  const handleOptionOne = (e) => {
+    e.preventDefault();
+    setOptionOne(e.target.value);
+  }
+
+  const handleOptionTwo = (e) => {
+    e.preventDefault();
+    setOptionTwo(e.target.value);
+  }
+
+  console.log('OPTION ONE:', optionOne);
+  console.log('OPTION TWO:', optionTwo);
+
+  const addNewQuestion = (e) => {
+    e.preventDefault();
+
+    const question = {
+      optionOneText: optionOne,
+      optionTwoText: optionTwo,
+      author: props.authedUser
+    }
+
+    dispatch(handleAddQuestion(question));
+    navigate('/home');
+  }
+  
 
   return (  
   <FormControl
@@ -22,7 +56,7 @@ const NewQuestion = (props) => {
       alignItems: 'center',
       p: 10 }
     }
-    >
+  >
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
     <Typography variant="h6" >Create Your Own Poll</Typography>
     <Typography variant='h4'>Would You Rather</Typography>
@@ -31,19 +65,11 @@ const NewQuestion = (props) => {
       <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Typography variant="h5" sx={{ mt: '2%' }}>Option 1</Typography>
         <TextField
-            placeholder="Enter option 1"
-            sx=
-            {{
-              width: '85%', mt: '2%'
-            }}
-          >
-          Something here
-          </TextField>
-      </Grid>
-      <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <Typography variant="h5" sx={{ mt: '2%' }}>Option 2</Typography>
-        <TextField
-        placeholder="Enter option 2"
+          onChange={handleOptionOne}
+          value={optionOne}
+          type="text"
+          name="optionOne"
+          placeholder="Enter option 1"
           sx=
           {{
             width: '85%', mt: '2%'
@@ -52,8 +78,26 @@ const NewQuestion = (props) => {
         Something here
         </TextField>
       </Grid>
+      <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <Typography variant="h5" sx={{ mt: '2%' }}>Option 2</Typography>
+        <TextField
+          onChange={handleOptionTwo}
+          value={optionTwo}
+          type="text"
+          name="optionTwo"
+          placeholder="Enter option 2"
+            sx=
+            {{
+              width: '85%', mt: '2%'
+            }}
+          >
+          Something here
+        </TextField>
+      </Grid>
     </Grid>
     <Button
+      type="submit"
+      onClick={addNewQuestion}
       variant="outlined"
       sx={{
         minWidth: 300,
@@ -68,7 +112,7 @@ const NewQuestion = (props) => {
   )
 }
 
-const mapStateToProps = ({ authedUser }) => {
+const mapStateToProps = ({ authedUser, dispatch }) => {
   return {
     authedUser: authedUser,
   }

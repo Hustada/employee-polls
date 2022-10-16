@@ -24,3 +24,7 @@ export function _getUser(userId, password) {
     );
   });
 }
+
+export function saveQuestion (info) {
+  return _saveQuestion(info)
+}
