@@ -55,6 +55,7 @@ const handleLogin = (e) => {
     <Container
       variant="outlined"
       sx={{
+        border: "1px solid gray",
         maxWidth: 400,
         mx: 'auto', // margin left & right
         my: 4, // margin top & botom
@@ -65,23 +66,17 @@ const handleLogin = (e) => {
         gap: 2,
         borderRadius: 'sm',
         boxShadow: 'md',
+        alignItems: 'center',
       }}
     >
       <Typography level="h4" component="h1" sx={{ textAlign: "center"}}>
         <b>Employee Polls</b>
       </Typography>
       <Typography level="body2" sx={{ textAlign: "center"}}>Sign in to continue</Typography>
-      <Typography> Allowed Users </Typography>
-      <List>
-        <ListItemText>Username: sarahedo, Password: password123 </ListItemText>
-        <ListItemText>Username: tylermcginnis, Password: abc321 </ListItemText>
-        <ListItemText>Username: zoshikanlu, Password: pass246</ListItemText>
-        <ListItemText>Username: mtsamis, Password: xyz123 </ListItemText>
-      </List>
       <FormControl>
         <TextField
           sx={{ 
-            maxWidth: 400,
+            minWidth: 300,
           }}
           type="username"
           name="username"
@@ -92,7 +87,9 @@ const handleLogin = (e) => {
         >
         </TextField>
         <TextField
-        sx={{ mt: 2 }}
+        sx={{ 
+          maxWidth: 400,
+          mt: 2 }}
           name="password"
           placeholder='Enter password'
           type="password"
@@ -102,6 +99,7 @@ const handleLogin = (e) => {
         </TextField>
         <Button
           sx={{
+            minWidth: 300,
             mt: 2,
             color: "orange",
             borderColor: "orange"
