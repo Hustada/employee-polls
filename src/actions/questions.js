@@ -31,7 +31,7 @@ export function updateQuestion(user, questionId, option) {
 
 export function handleAddQuestion(question) {
   return (dispatch, getState) => {
-    // const { authedUser } = getState();
+    const { authedUser } = getState();
     dispatch(showLoading());
 
     return saveQuestion(question)
@@ -39,8 +39,7 @@ export function handleAddQuestion(question) {
           dispatch(addQuestion(question));
           dispatch(addQuestionToUser({
               qid: question.id,
-              authedUser: question.author,
-              question: question
+              author: authedUser.name,
           }));
       })
       .then(() => dispatch(hideLoading()));;
