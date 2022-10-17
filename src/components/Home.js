@@ -9,10 +9,11 @@ import { randomDate } from '../utils/helpers';
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 const Home = (props) => {
-  console.log(props.authedUser);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  console.log(props.authedUser);
 
   return (
     <Container sx={{ mt: 5 }} >
