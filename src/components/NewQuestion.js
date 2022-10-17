@@ -28,9 +28,6 @@ const NewQuestion = ({ dispatch, authedUser }) => {
     setOptionTwo(e.target.value);
   }
 
-  console.log('OPTION ONE:', optionOne);
-  console.log('OPTION TWO:', optionTwo);
-
   const addNewQuestion = (e) => {
     e.preventDefault();
 
@@ -111,7 +108,7 @@ const NewQuestion = ({ dispatch, authedUser }) => {
 
 const mapStateToProps = ({ authedUser, dispatch }) => {
   return {
-    authedUser: authedUser,
+    authedUser: authedUser
   }
 }
 
