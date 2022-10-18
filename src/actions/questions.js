@@ -31,15 +31,14 @@ export function updateQuestion(user, questionId, option) {
 
 export function handleAddQuestion(question) {
   return (dispatch, getState) => {
-    const { authedUser } = getState();
-    dispatch(showLoading());
 
+    dispatch(showLoading());
     return saveQuestion(question)
       .then((question) => {
           dispatch(addQuestion(question));
           dispatch(addQuestionToUser({
               qid: question.id,
-              author: authedUser.name,
+              author: question.author,
           }));
       })
       .then(() => dispatch(hideLoading()));;

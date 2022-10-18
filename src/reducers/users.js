@@ -12,7 +12,7 @@ export default function users(state = {}, action) {
         ...state,
         [ action.author ]: {
             ...state[ action.author ],
-            questions: state[ action.author ].questions.concat(action.qid),
+            questions: state[ action.author ]
         },
       }
     default:
