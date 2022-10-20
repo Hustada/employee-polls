@@ -35,7 +35,7 @@ const NewQuestion = ({ dispatch, authedUser }) => {
     const question = {
       optionOneText: optionOne,
       optionTwoText: optionTwo,
-      author: authedUser.name,
+      author: authedUser.id,
     }
 
     dispatch(handleAddQuestion(question));
