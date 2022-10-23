@@ -17,6 +17,7 @@ export function handleInitialData() {
 
 export function handleAddQuestion(question) {
   return (dispatch, getState) => {
+    const { authedUser } = getState();
 
     dispatch(showLoading());
     return saveQuestion(question)
@@ -24,7 +25,7 @@ export function handleAddQuestion(question) {
           dispatch(addQuestion(question));
           dispatch(addQuestionToUser({
               qid: question.id,
-              author: question.author,
+              author: authedUser,
           }));
       })
       .then(() => dispatch(hideLoading()));;
