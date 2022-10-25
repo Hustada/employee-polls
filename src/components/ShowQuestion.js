@@ -29,19 +29,40 @@ const withRouter = (Component) => {
 
 
 const ShowQuestion = (props) => {
-  // const [vote, setVote] = useState('');
-  const [answer, setAnswer] = useState(false);
-
-
+  const [optionOneVote, setOptionOneVote] = useState(false);
+  const [optionTwoVote, setOptionTwoVote] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const { users, questions, id } = props;
   const question = props.questions[props.id];
   const user = props.users[props.authedUser];
   const avatar = question ? props.users[question.author].avatarURL : "";
-
-  const handleVoteAnswer = (e) => {
-    e.preventDefault(e);
-
+  
+  const handleOptionOneVote = (e) => {
+    setOptionOneVote(true);
   }
+
+  const handleOptionTwoVote = (e) => {
+    setOptionTwoVote(true);
+  }
+
+  const options = {
+    optionOneVote,
+    optionTwoVote,
+  }
+
+  const selectedAnswer ={
+    authedUser: props.authedUser.id,
+    qid: id,
+    answer: options.optionOneVote === true ? "optionOne" : "optionTwo",
+  }
+
+  console.log(selectedAnswer);
+
+  
+  // console.log(id);
+  // console.log('OptionOne:', optionOneVote)
+  // console.log('OptionTwo:', optionTwoVote)
+
   return (
   <Container>
     <Box sx={{ 
@@ -79,12 +100,14 @@ const ShowQuestion = (props) => {
           <Typography variant="h6" sx={{ m: 1 }}>{question.optionOne.text}?</Typography>
         </Box>
         <Button
+          className="optionOneButton"
           sx={{ backgroundColor: "orange" }}
           variant="contained"
           fullWidth
-          onClick={handleVoteAnswer}
+          onClick={handleOptionOneVote}
+          // disabled={optionTwoVote === true}
         >
-          Click
+          Vote
         </Button>
       </Grid>
       <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -106,7 +129,16 @@ const ShowQuestion = (props) => {
         >
           <Typography variant="h6" sx={{ m: 1 }}>{question.optionTwo.text}?</Typography>
         </Box>
-        <Button variant="contained" fullWidth sx={{ backgroundColor: "orange" }}>Click</Button>
+        <Button
+          className="optionTwoButton"
+          sx={{ backgroundColor: "orange" }}
+          variant="contained"
+          fullWidth
+          onClick={handleOptionTwoVote}
+          // disabled={optionOneVote === true}
+        >
+          Vote
+        </Button>
       </Grid>
       <Grid item xs={6}>
         

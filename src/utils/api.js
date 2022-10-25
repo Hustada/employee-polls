@@ -28,3 +28,7 @@ export function _getUser(userId, password) {
 export function saveQuestion (question) {
   return _saveQuestion(question)
 }
+
+export function saveQuestionAnswer(selectedAnswer) {
+  return _saveQuestionAnswer(selectedAnswer);
+}

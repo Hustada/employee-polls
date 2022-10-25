@@ -14,6 +14,7 @@ export function receiveQuestions(questions) {
 }
 
 export function addQuestion(question) {
+  console.log(question);
   return {
     type: ADD_QUESTION,
     question,
@@ -26,21 +27,5 @@ export function updateQuestion(user, questionId, option) {
     user,
     questionId,
     option,
-  };
-}
-
-export function handleAddQuestion(question) {
-  return (dispatch, getState) => {
-
-    dispatch(showLoading());
-    return saveQuestion(question)
-      .then((question) => {
-          dispatch(addQuestion(question));
-          dispatch(addQuestionToUser({
-              qid: question.id,
-              author: question.author,
-          }));
-      })
-      .then(() => dispatch(hideLoading()));;
   };
 }
