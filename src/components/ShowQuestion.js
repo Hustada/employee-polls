@@ -60,14 +60,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
     setOptionTwoVote(true);
     dispatch(handleQuestionAnswer(selectedAnswer))
   }
-
-  console.log(selectedAnswer);
-
   
-  // console.log(id);
-  // console.log('OptionOne:', optionOneVote)
-  // console.log('OptionTwo:', optionTwoVote)
-
   return (
   <Container>
     <Box sx={{ 

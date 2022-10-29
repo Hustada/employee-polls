@@ -20,7 +20,7 @@ import PollIcon from '@mui/icons-material/Poll';
 import { useState, useEffect } from "react";
 import { Settings } from "@mui/icons-material";
 
-const settings = ['Profile', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Leaderboard', 'Dashboard', 'Logout'];
 const routes = [
   {
     name: 'Home',
@@ -52,6 +52,8 @@ const Nav = (props) => {
         navigate('/home');
       case 'Profile':
         navigate('/home')
+      case 'Leaderboard':
+        navigate('/leaderboard')
       //do nothing
     }
   }
