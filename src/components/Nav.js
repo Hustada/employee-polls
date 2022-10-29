@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { setAuthedUser } from '../actions/authedUser';
+import { setAuthedUser, logout  } from '../actions/authedUser';
 import {
   AppBar,
   Box,
@@ -20,7 +20,7 @@ import PollIcon from '@mui/icons-material/Poll';
 import { useState, useEffect } from "react";
 import { Settings } from "@mui/icons-material";
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Dashboard', 'Logout'];
 const routes = [
   {
     name: 'Home',
@@ -42,19 +42,23 @@ const Nav = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleLogout = () => {
-    props.dispatch(setAuthedUser(null));
-    navigate('/');
-  }
-
   const handleSettings = (e) => {
-    e.preventDefault();
-  
+    const { settingValue } = e.currentTarget.dataset;
+    switch(settingValue) {
+      case 'Logout':
+        props.dispatch(setAuthedUser(null));
+        navigate('/');
+      case 'Dashboard':
+        navigate('/home');
+      case 'Profile':
+        navigate('/home')
+      //do nothing
+    }
   }
   
-  // const currentEvent = (event) => {
-  //   console.log(event.currentTarget);
-  // }
+  const currentEvent = (event) => {
+    console.log(event.currentTarget);
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -186,8 +190,8 @@ const Nav = (props) => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} 
-                  onClick={() => setUserSetting(setting)}
+                <MenuItem data-setting-value={setting} key={setting} 
+                  onClick={handleSettings}
                 >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
