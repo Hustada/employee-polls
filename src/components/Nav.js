@@ -17,7 +17,8 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import PollIcon from '@mui/icons-material/Poll';
-
+import { useState, useEffect } from "react";
+import { Settings } from "@mui/icons-material";
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const routes = [
@@ -36,8 +37,7 @@ const routes = [
 ]
 
 const Nav = (props) => {
-  // console.log(props.authedUser.avatarURL);
-
+  const [userSetting, setUserSetting] = useState('')
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -46,6 +46,15 @@ const Nav = (props) => {
     props.dispatch(setAuthedUser(null));
     navigate('/');
   }
+
+  const handleSettings = (e) => {
+    e.preventDefault();
+  
+  }
+  
+  // const currentEvent = (event) => {
+  //   console.log(event.currentTarget);
+  // }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -177,7 +186,9 @@ const Nav = (props) => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} 
+                  onClick={() => setUserSetting(setting)}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

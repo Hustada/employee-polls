@@ -1,6 +1,6 @@
-import { getInitialData, saveQuestion }  from "../utils/api";
-import { receiveQuestions, addQuestion } from "./questions";
-import { receiveUsers, addQuestionToUser } from "./users";
+import { getInitialData, saveQuestion, saveQuestionAnswer }  from "../utils/api";
+import { receiveQuestions, addQuestion, updateQuestion } from "./questions";
+import { receiveUsers, addQuestionToUser, addAnswerToUser } from "./users";
 import { setAuthedUser } from "./authedUser";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 
@@ -27,6 +27,16 @@ export function handleAddQuestion(question) {
               author: question.author,
           }));
       })
-      .then(() => dispatch(hideLoading()));;
+      .then(() => dispatch(hideLoading()));
+  };
+}
+
+export function handleQuestionAnswer(selectedAnswer) {
+ return (dispatch) => {
+    return saveQuestionAnswer(selectedAnswer).then((res) => {
+      console.log(selectedAnswer.answer);
+      dispatch(updateQuestion(selectedAnswer));
+      dispatch(addAnswerToUser(selectedAnswer));
+    })
   };
 }

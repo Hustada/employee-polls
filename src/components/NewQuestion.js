@@ -30,7 +30,6 @@ const NewQuestion = ({ dispatch, authedUser }) => {
 
   const addNewQuestion = (e) => {
     e.preventDefault();
-    console.log(authedUser.name);  
 
     const question = {
       optionOneText: optionOne,

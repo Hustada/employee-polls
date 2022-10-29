@@ -29,6 +29,6 @@ export function saveQuestion (question) {
   return _saveQuestion(question)
 }
 
-export function saveQuestionAnswer(selectedAnswer) {
-  return _saveQuestionAnswer(selectedAnswer);
+export function saveQuestionAnswer(props) {
+  return _saveQuestionAnswer(props);
 }

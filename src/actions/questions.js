@@ -14,18 +14,17 @@ export function receiveQuestions(questions) {
 }
 
 export function addQuestion(question) {
-  console.log(question);
   return {
     type: ADD_QUESTION,
     question,
   }
 }
 
-export function updateQuestion(user, questionId, option) {
+export function updateQuestion({ authedUser, qid, answer }) {
   return {
     type: UPDATE_QUESTION,
-    user,
-    questionId,
-    option,
+    authedUser,
+    qid,
+    answer,
   };
 }

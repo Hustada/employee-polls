@@ -12,9 +12,6 @@ const Home = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  console.log(props.authedUser);
-
   return (
     <Container sx={{ mt: 5 }} >
       <Typography 

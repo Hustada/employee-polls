@@ -15,6 +15,7 @@ import {
 } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { formatDate, formatQuestion } from '../utils/helpers';
+import { handleQuestionAnswer } from '../actions/shared';
 
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {
@@ -28,32 +29,36 @@ const withRouter = (Component) => {
 };
 
 
-const ShowQuestion = (props) => {
+const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
   const [optionOneVote, setOptionOneVote] = useState(false);
   const [optionTwoVote, setOptionTwoVote] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const { users, questions, id } = props;
-  const question = props.questions[props.id];
-  const user = props.users[props.authedUser];
-  const avatar = question ? props.users[question.author].avatarURL : "";
+  const question = questions[id];
+  const user = users[authedUser];
+  const avatar = question ? users[question.author].avatarURL : "";
   
-  const handleOptionOneVote = (e) => {
-    setOptionOneVote(true);
-  }
-
-  const handleOptionTwoVote = (e) => {
-    setOptionTwoVote(true);
-  }
-
   const options = {
     optionOneVote,
     optionTwoVote,
   }
 
   const selectedAnswer ={
-    authedUser: props.authedUser.id,
+    authedUser: authedUser.id,
     qid: id,
     answer: options.optionOneVote === true ? "optionOne" : "optionTwo",
+  }
+
+  const handleOptionOneVote = (e) => {
+    console.log(selectedAnswer);
+    e.preventDefault();
+    setOptionOneVote(true);
+    dispatch(handleQuestionAnswer(selectedAnswer))
+  }
+
+  const handleOptionTwoVote = (e) => {
+    console.log(selectedAnswer);
+    setOptionTwoVote(true);
+    dispatch(handleQuestionAnswer(selectedAnswer))
   }
 
   console.log(selectedAnswer);
