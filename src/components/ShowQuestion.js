@@ -30,37 +30,52 @@ const withRouter = (Component) => {
 
 
 const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
-  const [optionOneVote, setOptionOneVote] = useState(false);
-  const [optionTwoVote, setOptionTwoVote] = useState(false);
+  const [optionOneVote, setOptionOneVote] = useState("");
+  const [optionTwoVote, setOptionTwoVote] = useState("");
   const [disabled, setDisabled] = useState(false);
   const question = questions[id];
   const user = users[authedUser];
   const avatar = question ? users[question.author].avatarURL : "";
-  
-  const options = {
-    optionOneVote,
-    optionTwoVote,
-  }
-
-  const selectedAnswer ={
-    authedUser: authedUser.id,
-    qid: id,
-    answer: options.optionOneVote === true ? "optionOne" : "optionTwo",
-  }
+  const optionOneVotes = question.optionOne.votes.length;
+  const optionTwoVotes = question.optionTwo.votes.length;
+  const totalVotes = optionOneVotes + optionTwoVotes;
+  const optionOnePercentage = optionOneVotes / totalVotes;
+  console.log('OPTION ONE VOTES:', optionOneVotes)
+  console.log('OPTION TWO VOTES:', optionTwoVotes)
+  console.log('TOTAL VOTES:', totalVotes);
+  console.log('OPTION ONE PERCENTAGE:', optionOnePercentage);
 
   const handleOptionOneVote = (e) => {
     console.log(selectedAnswer);
     e.preventDefault();
-    setOptionOneVote(true);
+    setOptionOneVote("optionOne");
+    setOptionTwoVote("");
     dispatch(handleQuestionAnswer(selectedAnswer))
   }
 
   const handleOptionTwoVote = (e) => {
+    e.preventDefault();
     console.log(selectedAnswer);
-    setOptionTwoVote(true);
+    setOptionTwoVote("optionTwo");
+    setOptionOneVote("");
     dispatch(handleQuestionAnswer(selectedAnswer))
+
   }
-  
+
+  const selectedOoptions = {
+    optionOneVote,
+    optionTwoVote,
+  }
+
+  console.log(optionOneVote);
+  console.log(optionTwoVote);
+
+  const selectedAnswer ={
+    authedUser: authedUser.id,
+    qid: id,
+    answer: "optionTwo", // fix this.
+  }
+
   return (
   <Container>
     <Box sx={{ 
@@ -79,6 +94,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
     </Box>
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Typography variant="h5">{optionOneVotes} Total Votes</Typography>
       <Box sx={{
           borderColor: '1 px solid gray',
           display: 'flex',
@@ -109,6 +125,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
         </Button>
       </Grid>
       <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <Typography variant="h5">{optionTwoVotes} Total Votes</Typography>
         <Box sx={{
           borderColor: '1 px solid gray',
           display: 'flex',

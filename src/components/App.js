@@ -9,6 +9,7 @@ import NewQuestion from "./NewQuestion";
 import "../App.css"
 import LoadingBar from "react-redux-loading-bar";
 import ShowQuestion from "./ShowQuestion";
+import LeaderBoard from "./LeaderBoard";
 
 const App = ({dispatch, authedUser, loading}) => {
   useEffect(() => {
@@ -28,6 +29,7 @@ const App = ({dispatch, authedUser, loading}) => {
             <Route path="/questions/:id" element={ <ShowQuestion />} />
             <Route path="/home" element={<Home />} />
             <Route path="/new" element={<NewQuestion />} />
+            <Route path="/leaderboard" element={<LeaderBoard />} />
           </Routes>
             )}
         </div>

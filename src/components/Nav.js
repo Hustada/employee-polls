@@ -20,7 +20,7 @@ import PollIcon from '@mui/icons-material/Poll';
 import { useState, useEffect } from "react";
 import { Settings } from "@mui/icons-material";
 
-const settings = ['Profile', 'Leaderboard', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 const routes = [
   {
     name: 'Home',
@@ -44,18 +44,25 @@ const Nav = (props) => {
 
   const handleSettings = (e) => {
     const { settingValue } = e.currentTarget.dataset;
-    switch(settingValue) {
-      case 'Logout':
-        props.dispatch(setAuthedUser(null));
-        navigate('/');
-      case 'Dashboard':
-        navigate('/home');
-      case 'Profile':
-        navigate('/home')
-      case 'Leaderboard':
-        navigate('/leaderboard')
-      //do nothing
+    if(settingValue === 'Logout') {
+      props.dispatch(setAuthedUser(null));
+      navigate('/');
     }
+    console.log(settingValue);
+
+    //dead with switch cases later.
+    // switch(settingValue) {
+    //   case 'Logout':
+    //     props.dispatch(setAuthedUser(null));
+    //     navigate('/');
+    //   case 'Leaderboard':
+    //     navigate('/leaderboard');
+    //   case 'Dashboard':
+    //     navigate('/home');
+    //   case 'New':
+    //     navigate('/new')
+    //   //do nothing
+    // }
   }
   
   const currentEvent = (event) => {
