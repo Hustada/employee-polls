@@ -55,6 +55,7 @@ const LeaderBoard = (users) => {
 
 const mapStateToProps = ({ users }) => {
     const orderedUsers = Object.values(users).sort((a, b) => {
+      console.log(a.questions)
       const totalA = Object.entries(a.answers).length + a.questions.length;
       console.log(totalA);
       const totalB = Object.entries(b.answers).length + b.questions.length;

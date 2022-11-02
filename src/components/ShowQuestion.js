@@ -45,7 +45,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
   const optionTwoVotes = question.optionTwo.votes.length;
   const totalVotes = optionOneVotes + optionTwoVotes;
   const optionOnePercentage = optionOneVotes === 0 ? 0 : formatAsPercent((optionOneVotes / totalVotes) * 100);
-  const optionTwoPercentage = optionTwoVOtes === 0 ? 0 : formatAsPercent((optionTwoVotes / totalVotes) * 100);
+  const optionTwoPercentage = optionTwoVotes === 0 ? 0 : formatAsPercent((optionTwoVotes / totalVotes) * 100);
   console.log(optionOneVotes)
   console.log(optionOnePercentage);
 
