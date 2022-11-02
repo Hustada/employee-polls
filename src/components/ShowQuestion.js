@@ -44,8 +44,10 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
   const optionOneVotes = question.optionOne.votes.length;
   const optionTwoVotes = question.optionTwo.votes.length;
   const totalVotes = optionOneVotes + optionTwoVotes;
-  const optionOnePercentage = formatAsPercent((optionOneVotes / totalVotes) * 100);
-  const optionTwoPercentage = formatAsPercent((optionTwoVotes / totalVotes) * 100);
+  const optionOnePercentage = optionOneVotes === 0 ? 0 : formatAsPercent((optionOneVotes / totalVotes) * 100);
+  const optionTwoPercentage = optionTwoVOtes === 0 ? 0 : formatAsPercent((optionTwoVotes / totalVotes) * 100);
+  console.log(optionOneVotes)
+  console.log(optionOnePercentage);
 
   const handleVotes = (e) => {
     e.preventDefault();
@@ -107,7 +109,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
         >
           Vote
         </Button>
-        <Typography variant="h5" sx={{ mt: 2 }}>Percent Voted: { isNaN(optionOnePercentage) ? optionOnePercentage : 0 }</Typography>
+        <Typography variant="h5" sx={{ mt: 2 }}>Percent Voted: {optionOnePercentage}</Typography>
       </Grid>
       <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <Typography variant="h5" sx={{mb: 2}} >{optionTwoVotes} Votes</Typography>
@@ -140,7 +142,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
         >
           Vote
         </Button>
-        <Typography variant="h5" sx={{ mt: 2 }}>Percent Voted: { isNaN(optionTwoPercentage) ? optionTwoPercentage : 0 }</Typography>
+        <Typography variant="h5" sx={{ mt: 2 }}>Percent Voted: {optionTwoPercentage}</Typography>
       </Grid>
       <Grid item xs={6}>
         

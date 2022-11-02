@@ -14,6 +14,8 @@ const Home = (props) => {
   const location = useLocation();
   return (
     <Container sx={{ mt: 5 }} >
+      {console.log(props.authedUser)}
+      {console.log(props)}
       <Typography 
         variant="h4" 
         sx={

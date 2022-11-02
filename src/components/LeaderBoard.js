@@ -22,19 +22,6 @@ const rows = [
 ];
 
 const LeaderBoard = (users) => {
-
-  const orderedUsers = Object.values(users)
-    .map((user) => ({
-      id: user.id,
-      name: user.name,
-      avatarURL: user.avatarURL,
-      // answered: Object.keys(user.answers).length,
-      // created: user.questions.length,
-    }))
-    .sort((a, b) => b.answered + b.created - (a.answered + a.created));
-
-    console.log(users);
-
   return (
     <Container sx={{ mt: 5 }}>
       <TableContainer component={Paper}>
@@ -66,10 +53,17 @@ const LeaderBoard = (users) => {
   )
 }
 
-const mapStateToProps = ({ users, questions }) => {
+const mapStateToProps = ({ users }) => {
+    const orderedUsers = Object.values(users).sort((a, b) => {
+      const totalA = Object.entries(a.answers).length + a.questions.length;
+      console.log(totalA);
+      const totalB = Object.entries(b.answers).length + b.questions.length;
+      console.log(totalB);
+      return totalB - totalA;
+    })
+    console.log(orderedUsers);
   return {
-    users,
-    questions,
+    users: orderedUsers,
   }
 }
 
