@@ -36,8 +36,8 @@ const LeaderBoard = ({ users }) => {
                   <TableCell component="th" scope="row">
                     {user.name}
                   </TableCell>
-                  <TableCell align="right">{console.log(answeredCount)}{answeredCount}</TableCell>
-                  <TableCell align="right">{console.log(user.questions)} {user.questions.length}</TableCell>
+                  <TableCell align="right">{answeredCount}</TableCell>
+                  <TableCell align="right">{user.questions.length}</TableCell>
                 </TableRow>
               )
             })}
@@ -50,14 +50,10 @@ const LeaderBoard = ({ users }) => {
 
 const mapStateToProps = ({ users }) => {
     const orderedUsers = Object.values(users).sort((a, b) => {
-      console.log(a.questions)
       const totalA = Object.entries(a.answers).length + a.questions.length;
-      console.log(totalA);
       const totalB = Object.entries(b.answers).length + b.questions.length;
-      console.log(totalB);
       return totalB - totalA;
     })
-    console.log(orderedUsers);
   return {
     users: orderedUsers,
   }
