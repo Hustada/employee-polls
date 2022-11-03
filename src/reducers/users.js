@@ -8,11 +8,12 @@ export default function users(state = {}, action) {
         ...action.users,
       }
     case ADD_QUESTION_TO_USER:
+      console.log(action);
       return {
         ...state,
         [ action.author ]: {
             ...state[ action.author ],
-            questions: state[ action.author ]
+            questions: state[ action.author ].questions.concat(action.qid),
         },
       }
     case ADD_ANSWER_TO_USER:

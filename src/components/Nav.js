@@ -48,25 +48,9 @@ const Nav = (props) => {
       props.dispatch(setAuthedUser(null));
       navigate('/');
     }
-    console.log(settingValue);
-
-    //dead with switch cases later.
-    // switch(settingValue) {
-    //   case 'Logout':
-    //     props.dispatch(setAuthedUser(null));
-    //     navigate('/');
-    //   case 'Leaderboard':
-    //     navigate('/leaderboard');
-    //   case 'Dashboard':
-    //     navigate('/home');
-    //   case 'New':
-    //     navigate('/new')
-    //   //do nothing
-    // }
   }
   
   const currentEvent = (event) => {
-    console.log(event.currentTarget);
   }
 
   const handleOpenNavMenu = (event) => {
