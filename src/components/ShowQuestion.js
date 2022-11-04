@@ -20,15 +20,15 @@ import { handleQuestionAnswer } from '../actions/shared';
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {
     let location = useLocation();
-    let navigate = useNavigate();
     let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
+    return <Component {...props} router={{ location, params }} />;
   };
 
   return ComponentWithRouterProp;
 };
 
 const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
+  const navigate = useNavigate();
 
   function formatAsPercent(num) {
     return new Intl.NumberFormat('default', {
@@ -46,8 +46,6 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
   const totalVotes = optionOneVotes + optionTwoVotes;
   const optionOnePercentage = optionOneVotes === 0 ? 0 : formatAsPercent((optionOneVotes / totalVotes) * 100);
   const optionTwoPercentage = optionTwoVotes === 0 ? 0 : formatAsPercent((optionTwoVotes / totalVotes) * 100);
-  console.log(optionOneVotes)
-  console.log(optionOnePercentage);
 
   const handleVotes = (e) => {
     e.preventDefault();
@@ -58,6 +56,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
       answer: e.currentTarget.value,
     }
     dispatch(handleQuestionAnswer(selectedAnswer))
+    navigate('/home')
   }
 
   return (

@@ -22,7 +22,6 @@ const QuestionCard = (props) => {
   const question = formatQuestion(questions[id], users[questions[id].author]);
   const avatar = question ? props.users[question.author].avatarURL : "";
   const navigate = useNavigate();
-  console.log(questions);
 
   return (
     <Grid item  xs={12} sm={6} md={3}>

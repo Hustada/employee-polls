@@ -7,15 +7,24 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
 import { randomDate } from '../utils/helpers';
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useState } from 'react';
 
-const Home = (props) => {
+const Home = ({ questionIds, questions, authedUser }) => {
+  const authedID = authedUser.id;
+  const [answered, unanswered] = useState('');
+  const newQuestions = questionIds.filter((qid) => !(questions[qid].optionOne.votes.includes(authedID) || questions[qid].optionTwo.votes.includes(authedID)));
+  const doneQuestions = questionIds.filter((qid) => !newQuestions.includes(qid));
+
+  console.log('AUTHED_USER_ID:', authedUser.id);
+  console.log('NEW QUESTIONS:', newQuestions);
+  console.log('DONES_QUESTIONS', doneQuestions);
+ 
 
   const navigate = useNavigate();
   const location = useLocation();
+
   return (
     <Container sx={{ mt: 5 }} >
-      {console.log(props.authedUser)}
-      {console.log(props)}
       <Typography 
         variant="h4" 
         sx={
@@ -30,7 +39,7 @@ const Home = (props) => {
             New Questions
       </Typography>
       <Grid container spacing={2}>
-      {props.questionIds.map((id) => (
+      {newQuestions.map((id) => (
          <QuestionCard id={id} key={id}/>
       ))}
       </Grid>
@@ -47,16 +56,22 @@ const Home = (props) => {
           }}>
             Done
       </Typography>
+      <Grid container spacing={2} sx={{ mt: 3 }}>
+      {doneQuestions.map((id) => (
+         <QuestionCard id={id} key={id}/>
+      ))}
+      </Grid>
     </Container>
    
   )
 }
 
 const mapStateToProps = ({ questions, authedUser }) => ({
-  authedUser,
   questionIds: Object.keys(questions).sort(
     (a,b) => questions[b].timestamp > questions[a].timestamp
   ),
+  authedUser,
+  questions,
 });
 
 export default connect(mapStateToProps)(Home);

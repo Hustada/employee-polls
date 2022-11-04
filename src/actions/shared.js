@@ -34,7 +34,6 @@ export function handleAddQuestion(question) {
 export function handleQuestionAnswer(selectedAnswer) {
  return (dispatch) => {
     return saveQuestionAnswer(selectedAnswer).then((res) => {
-      console.log(selectedAnswer.answer);
       dispatch(updateQuestion(selectedAnswer));
       dispatch(addAnswerToUser(selectedAnswer));
     })
