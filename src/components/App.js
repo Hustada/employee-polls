@@ -10,6 +10,7 @@ import "../App.css"
 import LoadingBar from "react-redux-loading-bar";
 import ShowQuestion from "./ShowQuestion";
 import LeaderBoard from "./LeaderBoard";
+import NotFound from "./NotFound";
 
 const App = ({dispatch, authedUser, loading}) => {
   useEffect(() => {
@@ -30,6 +31,7 @@ const App = ({dispatch, authedUser, loading}) => {
             <Route path="/home" element={<Home />} />
             <Route path="/add" element={<NewQuestion />} />
             <Route path="/leaderboard" element={<LeaderBoard />} />
+            <Route path="/404" element={<NotFound />} />
           </Routes>
             )}
         </div>
