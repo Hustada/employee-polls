@@ -31,8 +31,8 @@ const routes = [
     path: '/leaderboard'
   },
   {
-    name: 'New',
-    path: '/new'
+    name: 'Add',
+    path: '/add'
   }
 ]
 

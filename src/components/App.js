@@ -28,7 +28,7 @@ const App = ({dispatch, authedUser, loading}) => {
           <Routes>
             <Route path="/questions/:id" element={ <ShowQuestion />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/new" element={<NewQuestion />} />
+            <Route path="/add" element={<NewQuestion />} />
             <Route path="/leaderboard" element={<LeaderBoard />} />
           </Routes>
             )}

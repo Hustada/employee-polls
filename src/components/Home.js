@@ -36,7 +36,7 @@ const Home = ({ questionIds, questions, authedUser }) => {
             borderColor: 'orange',
             borderRadius: 1
           }}>
-            New Questions
+            Unanswered
       </Typography>
       <Grid container spacing={2}>
       {newQuestions.map((id) => (
@@ -54,7 +54,7 @@ const Home = ({ questionIds, questions, authedUser }) => {
             borderColor: 'orange' ,
             borderRadius: 1
           }}>
-            Done
+            Answered
       </Typography>
       <Grid container spacing={2} sx={{ mt: 3 }}>
       {doneQuestions.map((id) => (
