@@ -38,7 +38,7 @@ describe('saveQuestion', () => {
   });
 });
 
-describe('Test on _saveQuestionAnswer', () => {
+describe('_saveQuestionAnswer', () => {
   it('will return true when correct data is passed', async () => {
       const data = {
           authedUser: 'sarahedo',
