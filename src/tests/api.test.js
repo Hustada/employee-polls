@@ -1,4 +1,5 @@
 import { saveQuestion, _getUser, saveQuestionAnswer } from "../utils/api";
+import { _saveQuestionAnswer } from "../utils/_DATA";
 import configureStore from 'redux-mock-store';
 
 const mockStore = configureStore([]);
@@ -37,25 +38,21 @@ describe('saveQuestion', () => {
   });
 });
 
-describe('saveQuestionAnswer', () => {
-  const authedUser = "tylermcginnis";
-  const qid = "vthrdm985a262al8qx3do";
-  const answers = "optionTwo";
-
-  it('will throw an error if the wrong data is provided', async () => {
-    try {
-      await saveQuestionAnswer({answers})
-    } catch (err) {
-      expect(err).toEqual("Please provide authedUser, qid, and answer")
-    }
+describe('Test on _saveQuestionAnswer', () => {
+  it('will return true when correct data is passed', async () => {
+      const data = {
+          authedUser: 'sarahedo',
+          qid: 'vthrdm985a262al8qx3do',
+          answer: 'optionTwo'
+      }
+      const result = await _saveQuestionAnswer(data)
+      expect(result).toEqual(true)
   })
 
-  it("Test that saveQuestionAnswer will return question object", async () => {
-    const answerData = {
-      authedUser: "sarahedo",
-      qid: "xj352vofupe1dqz9emx13r",
-      answer: "optionOne",
-    };
-    await expect(saveQuestionAnswer(answerData)).resolves.toEqual(true);
-  });
+  it('will return error when incorrect data is passed', async () => {
+      const data = {
+          answer: ''
+      }
+      await expect(_saveQuestionAnswer(data)).rejects.toEqual('Please provide authedUser, qid, and answer')
+  })
 })
