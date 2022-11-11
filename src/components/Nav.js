@@ -36,7 +36,7 @@ const routes = [
   }
 ]
 
-const Nav = ({ authedUser }, props) => {
+const Nav = ({ authedUser, dispatch }, props) => {
   const [userSetting, setUserSetting] = useState('')
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -45,7 +45,7 @@ const Nav = ({ authedUser }, props) => {
   const handleSettings = (e) => {
     const { settingValue } = e.currentTarget.dataset;
     if(settingValue === 'Logout') {
-      props.dispatch(setAuthedUser(null));
+      dispatch(setAuthedUser(null));
       navigate('/');
     }
   }
@@ -194,9 +194,10 @@ const Nav = ({ authedUser }, props) => {
   );
 };
 
-const mapStateToProps = ( { authedUser }, props ) => {
+const mapStateToProps = ( { authedUser, dispatch }, props ) => {
   return {
     authedUser,
+    dispatch,
   };
 }
 export default connect(mapStateToProps)(Nav);
