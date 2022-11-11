@@ -36,7 +36,7 @@ const routes = [
   }
 ]
 
-const Nav = (props) => {
+const Nav = ({ authedUser }, props) => {
   const [userSetting, setUserSetting] = useState('')
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -48,9 +48,6 @@ const Nav = (props) => {
       props.dispatch(setAuthedUser(null));
       navigate('/');
     }
-  }
-  
-  const currentEvent = (event) => {
   }
 
   const handleOpenNavMenu = (event) => {
@@ -68,7 +65,7 @@ const Nav = (props) => {
     setAnchorElUser(null);
   };
 
-  const avatar = props.authedUser.avatarURL;
+  const avatar = authedUser.avatarURL;
 
   return (
     <AppBar sx={{bgcolor: "black" }} position="static">
@@ -163,7 +160,7 @@ const Nav = (props) => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Papa" src={avatar} />
+                <Avatar data-testid="avatar" alt="avatar" src={avatar} />
               </IconButton>
             </Tooltip>
             <Menu

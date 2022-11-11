@@ -90,6 +90,7 @@ const NewQuestion = ({ dispatch, authedUser }) => {
       </Grid>
     </Grid>
     <Button
+      data-testid='question-submit-btn'
       type="submit"
       onClick={addNewQuestion}
       variant="outlined"

@@ -9,9 +9,9 @@ import App from './components/App';
 import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
-const store = createStore(reducer, middleware);
+export const store = createStore(reducer, middleware);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') || document.createElement('div'));
 root.render(
   <Provider store={store}>
     <Router>

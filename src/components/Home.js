@@ -9,23 +9,18 @@ import { randomDate } from '../utils/helpers';
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useState } from 'react';
 
-const Home = ({ questionIds, questions, authedUser }) => {
+function Home ({ questionIds, questions, authedUser }) {
   const authedID = authedUser.id;
   const [answered, unanswered] = useState('');
   const newQuestions = questionIds.filter((qid) => !(questions[qid].optionOne.votes.includes(authedID) || questions[qid].optionTwo.votes.includes(authedID)));
   const doneQuestions = questionIds.filter((qid) => !newQuestions.includes(qid));
-
-  console.log('AUTHED_USER_ID:', authedUser.id);
-  console.log('NEW QUESTIONS:', newQuestions);
-  console.log('DONES_QUESTIONS', doneQuestions);
- 
-
   const navigate = useNavigate();
   const location = useLocation();
 
   return (
     <Container sx={{ mt: 5 }} >
-      <Typography 
+      <Typography
+        data-testid="Unanswered"
         variant="h4" 
         sx={
           { 
@@ -43,7 +38,8 @@ const Home = ({ questionIds, questions, authedUser }) => {
          <QuestionCard id={id} key={id}/>
       ))}
       </Grid>
-      <Typography 
+      <Typography
+        data-testid="answered"
         variant="h4" 
         sx={
           { 
