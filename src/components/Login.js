@@ -15,6 +15,8 @@ import {
   Container,
   List,
   ListItemText,
+  Alert,
+  Box,
 } from '@mui/material'
 
 const Login = (props) => {
@@ -33,7 +35,7 @@ const handleLogin = (e) => {
 
   if (!username || !password) {
     setError(true);
-    alert("set username and password");
+    setErrorMessage('set username and password');
   } else {
     _getUser(username, password).then((user) => {
       if (user) {
@@ -72,6 +74,13 @@ const handleLogin = (e) => {
       <Typography level="h4" component="h1" sx={{ textAlign: "center"}}>
         <b>Employee Polls</b>
       </Typography>
+      <Box className="box-center">
+        {error && (
+          <Alert data-testid="login-error" severity="error">
+            Incorrect username or password
+          </Alert>
+        )}
+      </Box>
       <Typography level="body2" sx={{ textAlign: "center"}}>Sign in to continue</Typography>
       <FormControl>
         <TextField
@@ -84,6 +93,7 @@ const handleLogin = (e) => {
           placeholder='Enter username'
           type="text"
           onChange={(e) => setUsername(e.target.value)}
+          data-testid="username"
         >
         </TextField>
         <TextField
@@ -95,6 +105,7 @@ const handleLogin = (e) => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          data-testid="password"
         >
         </TextField>
         <Button
@@ -107,6 +118,7 @@ const handleLogin = (e) => {
           variant="outlined"
           fullWidth
           type="submit"
+          data-testid="login-btn"
           onClick={handleLogin}
         >
           Login
