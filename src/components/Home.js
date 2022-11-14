@@ -12,8 +12,9 @@ import { useState } from 'react';
 function Home ({ questionIds, questions, authedUser }) {
   const authedID = authedUser.id;
   const [answered, unanswered] = useState('');
-  const newQuestions = questionIds.filter((qid) => !(questions[qid].optionOne.votes.includes(authedID) || questions[qid].optionTwo.votes.includes(authedID)));
-  const doneQuestions = questionIds.filter((qid) => !newQuestions.includes(qid));
+  const filteredNewQuestions = questionIds.filter((qid) => !(questions[qid].optionOne.votes.includes(authedID) || questions[qid].optionTwo.votes.includes(authedID)));
+  const newQuestions = filteredNewQuestions.sort((a, b) => questions[b].timestmap - questions[a].timestamp);
+  const doneQuestions = questionIds.filter((qid) => !newQuestions.includes(qid)).sort((a, b) => questions[b].timestamp - questions[a].timestamp);
   const navigate = useNavigate();
   const location = useLocation();
 
