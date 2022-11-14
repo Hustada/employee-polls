@@ -44,18 +44,4 @@ describe("NewQuestion", () => {
     expect(screen.getByText("Option 1")).toBeInTheDocument();
     expect(screen.getByText("Option 2")).toBeInTheDocument();
   });
-
-  // it("will redirect to dashboard after submit", async () => {
-  //   const view = render(
-  //     <MemoryRouter>
-  //       <Provider store={mockedStore}>
-  //         <NewQuestion />
-  //       </Provider>
-  //     </MemoryRouter>
-  //   );
-  //   const submitQuestion = screen.getByTestId('question-submit-btn');
-  //   fireEvent.click(submitQuestion);
-  //   view.rerender();
-  //   expect(submitQuestion).not.toBeInTheDocument();
-  // });
 });
