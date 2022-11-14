@@ -3,6 +3,7 @@ import { _getUser } from '../utils/api'
 import { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { 
+  Navigate,
   useNavigate,
   useLocation,
   useParams 

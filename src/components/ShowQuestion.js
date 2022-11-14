@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
   Box,
   Typography,
@@ -28,6 +28,8 @@ const withRouter = (Component) => {
 };
 
 const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
+  const [optionOneVote, setOptionOne] = useState(false);
+  const [optionTwoVote, setOptionTwo] = useState(false);
   const navigate = useNavigate();
 
   function formatAsPercent(num) {
@@ -39,6 +41,9 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
   }
 
   const question = questions[id];
+  if(!question) {
+    return <Navigate to='/404'/>
+  }
   const user = users[authedUser];
   const avatar = question ? users[question.author].avatarURL : "";
   const optionOneVotes = question.optionOne.votes.length;
@@ -55,8 +60,8 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
       qid: id,
       answer: e.currentTarget.value,
     }
+    selectedAnswer.answer === 'optionOne' ? setOptionOne(true) : setOptionTwo(true);
     dispatch(handleQuestionAnswer(selectedAnswer))
-    navigate('/home')
   }
 
   return (
@@ -104,7 +109,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
           fullWidth
           onClick={handleVotes}
           value="optionOne"
-          // disabled={optionTwoVote === true}
+          disabled={optionTwoVote === true}
         >
           Vote
         </Button>
@@ -137,7 +142,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
           fullWidth
           onClick={handleVotes}
           value="optionTwo"
-          // disabled={optionOneVote === true}
+          disabled={optionOneVote === true}
         >
           Vote
         </Button>

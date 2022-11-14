@@ -12,7 +12,7 @@ const NotFound = () => {
 
   const fourOfour = () =>{
     setTimeout(() => {
-      navigate('/');
+      navigate('/home');
     }, 1000);
   }
 
@@ -28,7 +28,7 @@ const NotFound = () => {
       PAGE NOT FOUND
     </Typography>
     <Typography variant='body1'>
-      <Button onClick={fourOfour}>Click here to Login</Button>
+      <Button onClick={fourOfour}>Click here to go to the dashboard</Button>
     </Typography>
     </Container>
   )
