@@ -92,7 +92,7 @@ function Home ({ questionIds, questions, authedUser }) {
 
 const mapStateToProps = ({ questions, authedUser }) => ({
   questionIds: Object.keys(questions).sort(
-    (a,b) => questions[b].timestamp > questions[a].timestamp
+    (a,b) => questions[b].timestamp - questions[a].timestamp
   ),
   authedUser,
   questions,
