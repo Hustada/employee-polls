@@ -64,6 +64,9 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
     dispatch(handleQuestionAnswer(selectedAnswer))
   }
 
+  const userVotedOne = question.optionOne.votes.includes(authedUser.id);
+  const userVotedTwo = question.optionTwo.votes.includes(authedUser.id);
+
   return (
   <Container>
     <Box sx={{ 
@@ -109,7 +112,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
           fullWidth
           onClick={handleVotes}
           value="optionOne"
-          disabled={optionTwoVote === true}
+          disabled={userVotedTwo === true}
         >
           Vote
         </Button>
@@ -142,7 +145,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
           fullWidth
           onClick={handleVotes}
           value="optionTwo"
-          disabled={optionOneVote === true}
+          disabled={userVotedOne === true}
         >
           Vote
         </Button>
