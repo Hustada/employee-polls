@@ -127,7 +127,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
           value="optionOne"
           disabled={userVotedTwo === true}
         >
-          Vote
+          Vote for Option One
         </Button>
         <Typography variant="h5" sx={{ mt: 2 }}>Percent Voted: {optionOnePercentage}</Typography>
       </Grid>
@@ -162,7 +162,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
           value="optionTwo"
           disabled={userVotedOne === true}
         >
-          Vote
+          Vote for Option Two
         </Button>
         <Typography variant="h5" sx={{ mt: 2 }}>Percent Voted: {optionTwoPercentage}</Typography>
       </Grid>
