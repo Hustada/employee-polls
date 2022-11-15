@@ -93,6 +93,8 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
           justifyContent: 'center',
           alignItems: 'center',
           width: '100%',
+          height: '100%',
+
           borderRadius: 2,
           mb: 2
         }}
@@ -126,6 +128,8 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
           justifyContent: 'center',
           alignItems: 'center',
           width: '100%',
+          height: '100%',
+
           borderRadius: 2,
           mb: 2
         }}

@@ -17,8 +17,8 @@ import { borderRadius } from '@mui/system';
 
 function Home ({ questionIds, questions, authedUser }) {
   const authedID = authedUser.id;
-  const [unanswered, setUnanswered] = useState(false);
-  const [toggleLabel, setToggleLabel] = useState('Show Unanswered');
+  const [unanswered, setUnanswered] = useState(true);
+  const [toggleLabel, setToggleLabel] = useState('Show answered');
   const filteredNewQuestions = questionIds.filter((qid) => !(questions[qid].optionOne.votes.includes(authedID) || questions[qid].optionTwo.votes.includes(authedID)));
   const newQuestions = filteredNewQuestions.sort((a, b) => questions[b].timestmap - questions[a].timestamp);
   const doneQuestions = questionIds.filter((qid) => !newQuestions.includes(qid)).sort((a, b) => questions[b].timestamp - questions[a].timestamp);
@@ -28,10 +28,10 @@ function Home ({ questionIds, questions, authedUser }) {
   const showUnansweredAnswered = (event) => {
     if(unanswered === true) {
       setUnanswered(false);
-      setToggleLabel('Show Unanswered')
+      setToggleLabel('Show unanswered')
     } else {
       setUnanswered(true);
-      setToggleLabel('Show Answered')
+      setToggleLabel('Show answered')
     }
   }
 
