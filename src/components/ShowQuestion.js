@@ -51,7 +51,17 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
   const totalVotes = optionOneVotes + optionTwoVotes;
   const optionOnePercentage = optionOneVotes === 0 ? 0 : formatAsPercent((optionOneVotes / totalVotes) * 100);
   const optionTwoPercentage = optionTwoVotes === 0 ? 0 : formatAsPercent((optionTwoVotes / totalVotes) * 100);
+  const userVotedOne = question.optionOne.votes.includes(authedUser.id);
+  const userVotedTwo = question.optionTwo.votes.includes(authedUser.id);
+  
+  let userVotedText = "";
+  if(userVotedOne) {
+    userVotedText = "You voted for option one";
+  } else if(userVotedTwo) {
+    userVotedText = "You voted for option two";
+  }
 
+  console.log(userVotedText)
   const handleVotes = (e) => {
     e.preventDefault();
 
@@ -64,8 +74,8 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
     dispatch(handleQuestionAnswer(selectedAnswer))
   }
 
-  const userVotedOne = question.optionOne.votes.includes(authedUser.id);
-  const userVotedTwo = question.optionTwo.votes.includes(authedUser.id);
+  
+  console.log(userVotedOne, userVotedTwo, userVotedText);
 
   return (
   <Container>
@@ -81,6 +91,7 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
         src={avatar}
         sx={{ width: 300, height: 300, alignItems: "center", m: 3}}
       />
+      <Typography variant='h5' sx={{ mb: 5 }}>{userVotedText}</Typography>
       <Typography variant='h4' sx={{ mb: 5 }}>{totalVotes} Total Votes</Typography>
       <Typography variant='h3'>Would You Rather?</Typography>
     </Box>
