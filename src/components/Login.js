@@ -56,7 +56,7 @@ const handleLogin = (e) => {
     <Container
       variant="outlined"
       sx={{
-        border: "1px solid gray",
+        // border: "1px solid gray",
         maxWidth: 400,
         mx: 'auto', // margin left & right
         my: 4, // margin top & botom
