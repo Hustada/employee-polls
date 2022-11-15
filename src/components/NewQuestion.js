@@ -10,12 +10,14 @@ import {
   Button,
   Grid,
   TextField,
-  FormControl
+  FormControl,
+  Alert,
 } from '@mui/material';
 
 const NewQuestion = ({ dispatch, authedUser }) => {
-  const [optionOne, setOptionOne] = useState('')
-  const [optionTwo, setOptionTwo] = useState('')
+  const [optionOne, setOptionOne] = useState('');
+  const [optionTwo, setOptionTwo] = useState('');
+  const [errorMessage, setErrorMessage] = useState(false);
   const navigate = useNavigate();
 
   const handleOptionOne = (e) => {
@@ -36,7 +38,10 @@ const NewQuestion = ({ dispatch, authedUser }) => {
       optionTwoText: optionTwo,
       author: authedUser.id,
     }
-
+    if (question.optionOneText === ''  || question.optionTwoText === '') {
+      setErrorMessage(true)
+      return
+    }
     dispatch(handleAddQuestion(question));
     navigate('/home');
   }
@@ -52,6 +57,11 @@ const NewQuestion = ({ dispatch, authedUser }) => {
     }
   >
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    {errorMessage && (
+      <Alert data-testid="login-error" severity="error">
+        Please fill out all fields below
+      </Alert>
+    )}
     <Typography variant="h6" >Create Your Own Poll</Typography>
     <Typography variant='h4'>Would You Rather</Typography>
     </Box>
