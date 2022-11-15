@@ -74,9 +74,6 @@ const ShowQuestion = ({ dispatch, questions, users, authedUser, id }) => {
     dispatch(handleQuestionAnswer(selectedAnswer))
   }
 
-  
-  console.log(userVotedOne, userVotedTwo, userVotedText);
-
   return (
   <Container>
     <Box sx={{ 
