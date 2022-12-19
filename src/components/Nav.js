@@ -21,6 +21,8 @@ import { useState, useEffect } from "react";
 import { Settings } from "@mui/icons-material";
 
 const settings = ['Logout'];
+// An array of strings representing the settings available in the app
+
 const routes = [
   {
     name: 'Home',
@@ -35,21 +37,29 @@ const routes = [
     path: '/add'
   }
 ]
+// An array of objects representing the routes available in the app.
+// Each object has a 'name' property and a 'path' property.
+
 
 const Nav = ({ authedUser, dispatch }, props) => {
+  // Declare state variables for the nav and user menus
   const [userSetting, setUserSetting] = useState('')
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  // This function handles setting changes (e.g. logout)
   const handleSettings = (e) => {
+    // Get the setting value from the data attribute of the clicked element
     const { settingValue } = e.currentTarget.dataset;
+    // If the setting value is 'Logout', dispatch the setAuthedUser action to remove the authedUser from the state and navigate to the home page
     if(settingValue === 'Logout') {
       dispatch(setAuthedUser(null));
       navigate('/');
     }
   }
 
+  // These functions handle opening and closing the nav and user menus
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -65,7 +75,9 @@ const Nav = ({ authedUser, dispatch }, props) => {
     setAnchorElUser(null);
   };
 
+  // Get the avatar URL for the authedUser
   const avatar = authedUser.avatarURL;
+
 
   return (
     <AppBar sx={{bgcolor: "black" }} position="static">

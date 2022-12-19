@@ -49,14 +49,29 @@ const LeaderBoard = ({ users }) => {
 }
 
 const mapStateToProps = ({ users }) => {
-    const orderedUsers = Object.values(users).sort((a, b) => {
-      const totalA = Object.entries(a.answers).length + a.questions.length;
-      const totalB = Object.entries(b.answers).length + b.questions.length;
-      return totalB - totalA;
-    })
+  // 'mapStateToProps' is a function that maps the Redux store's state to the props of a React component
+  // 'users' is an object that maps user IDs to user objects
+
+  const orderedUsers = Object.values(users).sort((a, b) => {
+    // 'orderedUsers' is an array of user objects, sorted by the number of questions and answers they have
+    // 'a' and 'b' are user objects being compared
+
+    const totalA = Object.entries(a.answers).length + a.questions.length;
+    // 'totalA' is the total number of questions and answers the user represented by 'a' has
+    
+    const totalB = Object.entries(b.answers).length + b.questions.length;
+    // 'totalB' is the total number of questions and answers the user represented by 'b' has
+
+    return totalB - totalA;
+  })
+  // Sort 'orderedUsers' in descending order based on the number of questions and answers
   return {
     users: orderedUsers,
   }
+  // Return an object containing the 'orderedUsers' array as the 'users' prop
 }
 
 export default (connect)(mapStateToProps)(LeaderBoard);
+// 'connect' is a higher-order component that connects the 'LeaderBoard' component to the Redux store
+// 'mapStateToProps' specifies which slice of the store's state the component should receive as props
+// 'LeaderBoard' is the component being connected to the store
